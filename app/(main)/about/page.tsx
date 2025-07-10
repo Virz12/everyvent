@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Users, Calendar, MapPin, Star, Heart, Zap } from "lucide-react"
 import Link from "next/link"
 
-export function AboutPage() {
+export default function AboutPage() {
   const features = [
     {
       icon: Calendar,
@@ -72,8 +72,6 @@ export function AboutPage() {
 
   return (
     <div className="min-h-screen bg-slate-900">
-      <Header />
-
       {/* Hero Section */}
       <section className="bg-slate-900 py-20 px-4 lg:px-6">
         <div className="container mx-auto text-center">
@@ -83,7 +81,7 @@ export function AboutPage() {
             <span className="text-orange-500">Amazing Events</span>
           </h1>
           <p className="text-xl text-slate-300 mb-8 max-w-3xl mx-auto leading-relaxed">
-            EventHub is more than just an event platform. We're a community of passionate organizers and attendees
+            Everyvent is more than just an event platform. We're a community of passionate organizers and attendees
             working together to create meaningful experiences that bring people together.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -130,7 +128,7 @@ export function AboutPage() {
                 communities to connect, learn, and grow through shared experiences.
               </p>
               <p className="text-slate-300 text-lg mb-8 leading-relaxed">
-                Whether you're organizing a small workshop or a large conference, EventHub provides the tools and
+                Whether you're organizing a small workshop or a large conference, Everyvent provides the tools and
                 support you need to create memorable events that make a real impact.
               </p>
               <div className="space-y-4">
@@ -163,9 +161,9 @@ export function AboutPage() {
       <section className="bg-slate-800 py-20 px-4 lg:px-6">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">Why Choose EventHub?</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">Why Choose Everyvent?</h2>
             <p className="text-slate-300 text-lg max-w-2xl mx-auto">
-              We've built EventHub with both organizers and attendees in mind, creating a platform that makes events
+              We've built Everyvent with both organizers and attendees in mind, creating a platform that makes events
               better for everyone.
             </p>
           </div>
@@ -223,7 +221,7 @@ export function AboutPage() {
         <div className="container mx-auto text-center">
           <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">Ready to Get Started?</h2>
           <p className="text-slate-300 text-lg mb-8 max-w-2xl mx-auto">
-            Join thousands of organizers and attendees who are already using EventHub to create amazing events and build
+            Join thousands of organizers and attendees who are already using Everyvent to create amazing events and build
             stronger communities.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -244,8 +242,6 @@ export function AboutPage() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   )
 }

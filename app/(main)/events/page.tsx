@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import { useState, useMemo } from "react"
 import { Card, CardContent } from "@/components/ui/card"
@@ -6,9 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Calendar, MapPin, Users, Search } from "lucide-react"
-import { EventsFilter } from "./events-filter"
-import { Header } from "./header"
-import { Footer } from "./footer"
+import { EventsFilter } from "@/components/events-filter"
 
 // Extended events data with more variety
 const allEvents = [
@@ -255,13 +253,12 @@ const allEvents = [
   },
 ]
 
-type ViewMode = "grid" | "list"
-type SortOption = "popularity" | "date" | "price-low" | "price-high" | "rating"
+type SortOption = "popularity" | "date"
 
-export function EventsListPage() {
+
+export default function EventsListPage() {
   const [activeCategory, setActiveCategory] = useState("team-building")
   const [sortBy, setSortBy] = useState<SortOption>("popularity")
-  const [viewMode, setViewMode] = useState<ViewMode>("grid")
   const [searchQuery, setSearchQuery] = useState("")
   const [currentPage, setCurrentPage] = useState(1)
   const eventsPerPage = 9
@@ -294,12 +291,6 @@ export function EventsListPage() {
           return b.attendees - a.attendees
         case "date":
           return new Date(a.date).getTime() - new Date(b.date).getTime()
-        case "price-low":
-          return a.price - b.price
-        case "price-high":
-          return b.price - a.price
-        case "rating":
-          return b.rating - a.rating
         default:
           return 0
       }
@@ -335,9 +326,7 @@ export function EventsListPage() {
 
   return (
     <div className="min-h-screen bg-slate-900">
-      <Header />
-
-      {/* Replace the hero section with a simpler one */}
+      {/* Hero Section */}
       <div className="bg-slate-900 py-8 px-4 lg:px-6 border-b border-slate-800">
         <div className="container mx-auto">
           <h1 className="text-3xl lg:text-4xl font-bold text-white mb-2">All Events</h1>
@@ -347,7 +336,6 @@ export function EventsListPage() {
 
       <section className="py-12 px-4 lg:px-6">
         <div className="container mx-auto">
-          {/* Remove location and price filters, keep only search */}
           <div className="mb-8">
             <div className="relative max-w-2xl">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
@@ -360,17 +348,14 @@ export function EventsListPage() {
             </div>
           </div>
 
-          {/* Keep existing EventsFilter component */}
           <EventsFilter
             onCategoryChange={(category) => {
               setActiveCategory(category)
               setCurrentPage(1)
             }}
             onSortChange={setSortBy}
-            onViewChange={setViewMode}
             activeCategory={activeCategory}
             sortBy={sortBy}
-            viewMode={viewMode}
           />
 
           {/* Results Summary */}
@@ -386,23 +371,21 @@ export function EventsListPage() {
             </p>
           </div>
 
-          {/* Updated Events Grid/List - remove featured, love button, rating */}
-          <div className={`mb-12 ${viewMode === "grid" ? "grid md:grid-cols-2 lg:grid-cols-3 gap-6" : "space-y-4"}`}>
+          <div className="mb-12 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {paginatedEvents.map((event) => (
               <Card
                 key={event.id}
-                className={`bg-slate-800 border-slate-700 overflow-hidden hover:bg-slate-750 transition-all duration-200 hover:scale-[1.02] ${viewMode === "list" ? "flex" : ""
-                  }`}
+                className="bg-slate-800 border-slate-700 overflow-hidden hover:scale-[1.02] hover:bg-slate-750 transition-all"
               >
-                <div className={`relative ${viewMode === "list" ? "w-64 shrink-0" : ""}`}>
+                <div className="relative">
                   <img
                     src={event.image || "/placeholder.svg"}
                     alt={event.title}
-                    className={`object-cover ${viewMode === "list" ? "w-full h-full" : "w-full h-48"}`}
+                    className="object-cover w-full h-48"
                   />
                 </div>
 
-                <CardContent className={`p-6 ${viewMode === "list" ? "flex-1" : ""}`}>
+                <CardContent className="p-6">
                   <div className="space-y-4">
                     <div className="flex items-start justify-between">
                       <div className="space-y-2">
@@ -413,8 +396,6 @@ export function EventsListPage() {
                           <span className="text-slate-400 text-xs">{getDaysUntilEvent(event.date)}</span>
                         </div>
                         <h3 className="text-white font-semibold text-lg leading-tight">{event.title}</h3>
-                        <p className="text-slate-400 text-sm">by {event.organizer}</p>
-                        {viewMode === "list" && <p className="text-slate-300 text-sm">{event.description}</p>}
                       </div>
                     </div>
 
@@ -438,11 +419,9 @@ export function EventsListPage() {
                     </div>
 
                     <div className="flex items-center justify-between pt-4">
-                      <div className="space-y-1">
-                        <span className="text-white font-semibold text-lg">Free</span>
-                      </div>
+                      <span className="text-white font-semibold text-lg">Free</span>
                       <Button size="sm" className="bg-orange-500 hover:bg-orange-600 text-white">
-                        View Details
+                        Join Event
                       </Button>
                     </div>
                   </div>
@@ -521,8 +500,6 @@ export function EventsListPage() {
           )}
         </div>
       </section>
-
-      <Footer />
     </div>
   )
 }

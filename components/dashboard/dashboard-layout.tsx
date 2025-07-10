@@ -43,7 +43,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
               <div className="h-8 w-8 bg-orange-500 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">E</span>
               </div>
-              <span className="text-white font-semibold text-xl">EventHub</span>
+              <span className="text-white font-semibold text-xl">Everyvent</span>
             </Link>
             <Button
               variant="ghost"

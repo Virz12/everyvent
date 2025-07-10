@@ -131,13 +131,11 @@ const events = [
   },
 ]
 
-type ViewMode = "grid" | "list"
-type SortOption = "popularity" | "date" | "price-low" | "price-high" | "rating"
+type SortOption = "popularity" | "date"
 
 export function EventsGrid() {
   const [activeCategory, setActiveCategory] = useState("team-building")
   const [sortBy, setSortBy] = useState<SortOption>("popularity")
-  const [viewMode, setViewMode] = useState<ViewMode>("grid")
 
   const filteredAndSortedEvents = useMemo(() => {
     const filtered = events.filter((event) => event.category === activeCategory)
@@ -149,12 +147,6 @@ export function EventsGrid() {
           return b.attendees - a.attendees
         case "date":
           return new Date(a.date).getTime() - new Date(b.date).getTime()
-        case "price-low":
-          return a.price - b.price
-        case "price-high":
-          return b.price - a.price
-        case "rating":
-          return b.rating - a.rating
         default:
           return 0
       }
@@ -190,28 +182,25 @@ export function EventsGrid() {
         <EventsFilter
           onCategoryChange={setActiveCategory}
           onSortChange={setSortBy}
-          onViewChange={setViewMode}
           activeCategory={activeCategory}
           sortBy={sortBy}
-          viewMode={viewMode}
         />
 
-        <div className={`mt-12 ${viewMode === "grid" ? "grid md:grid-cols-2 lg:grid-cols-3 gap-6" : "space-y-4"}`}>
+        <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredAndSortedEvents.map((event) => (
             <Card
               key={event.id}
-              className={`bg-slate-800 border-slate-700 overflow-hidden hover:bg-slate-750 transition-colors ${viewMode === "list" ? "flex" : ""
-                }`}
+              className="bg-slate-800 border-slate-700 overflow-hidden hover:scale-[1.02] transition-all"
             >
-              <div className={`relative ${viewMode === "list" ? "w-64 shrink-0" : ""}`}>
+              <div className="relative">
                 <img
-                  src={event.image || "/placeholder.svg"}
+                  src={event.image || "https://placehold.co/300x200"}
                   alt={event.title}
-                  className={`object-cover ${viewMode === "list" ? "w-full h-full" : "w-full h-48"}`}
+                  className="object-cover w-full h-48"
                 />
               </div>
 
-              <CardContent className={`p-6 ${viewMode === "list" ? "flex-1" : ""}`}>
+              <CardContent className="p-6">
                 <div className="space-y-4">
                   <div className="flex items-start justify-between">
                     <div className="space-y-2">
@@ -222,7 +211,6 @@ export function EventsGrid() {
                         <span className="text-slate-400 text-xs">{getDaysUntilEvent(event.date)}</span>
                       </div>
                       <h3 className="text-white font-semibold text-lg leading-tight">{event.title}</h3>
-                      {viewMode === "list" && <p className="text-slate-300 text-sm">{event.description}</p>}
                     </div>
                   </div>
 
@@ -247,7 +235,7 @@ export function EventsGrid() {
 
                   <div className="flex items-center justify-between pt-4">
                     <span className="text-white font-semibold text-lg">Free</span>
-                    <Button size="sm" className="bg-orange-500 hover:bg-orange-600 text-white">
+                    <Button size="sm" className="bg-orange-500 hover:bg-orange-600 text-white cursor-pointer">
                       Join Event
                     </Button>
                   </div>
@@ -264,6 +252,6 @@ export function EventsGrid() {
           </div>
         )}
       </div>
-    </section>
+    </section >
   )
 }

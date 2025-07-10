@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { Calendar, Heart, Users } from "lucide-react"
+import { Calendar, Heart, MapPin, Users } from "lucide-react"
 
 export function HowItWorks() {
   const steps = [
@@ -11,11 +11,11 @@ export function HowItWorks() {
         "Discover events that match your interests from our curated selection of workshops, meetups, and conferences.",
     },
     {
-      icon: Heart,
+      icon: MapPin,
       title: "Step 2",
-      subtitle: "Save & Share",
+      subtitle: "Check & Make sure",
       description:
-        "Save events you love and share them with friends. Get notifications for early bird pricing and updates.",
+        "Review event details, select your preferred date and time, and make sure there is enough space for you.",
     },
     {
       icon: Users,
@@ -33,7 +33,7 @@ export function HowItWorks() {
             <div className="space-y-4">
               <h2 className="text-3xl lg:text-4xl font-bold text-white">How it works</h2>
               <p className="text-slate-300 text-lg">
-                Getting started with EventHub is simple. Follow these three easy steps to discover and join amazing
+                Getting started with Everyvent is simple. Follow these three easy steps to discover and join amazing
                 events in your area.
               </p>
             </div>
@@ -53,7 +53,7 @@ export function HowItWorks() {
               ))}
             </div>
 
-            <Button className="bg-orange-500 hover:bg-orange-600 text-white">Get Started</Button>
+            <Button className="bg-orange-500 hover:bg-orange-600 text-white cursor-pointer">Get Started</Button>
           </div>
 
           <div className="relative">

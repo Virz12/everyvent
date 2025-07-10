@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { Calendar, MapPin, Users } from "lucide-react"
+import Link from "next/link"
 
 export function HeroSection() {
   return (
@@ -20,31 +21,20 @@ export function HeroSection() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-              <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-white px-6 sm:px-8">
-                Explore Events
+              <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-white px-6 sm:px-8 cursor-pointer">
+                <Link href="/events">
+                  Explore Event
+                </Link>
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                className="border-slate-600 text-slate-300 hover:bg-slate-800 bg-transparent"
+                className="border-slate-600 text-slate-300 hover:bg-slate-800 bg-transparent cursor-pointer"
               >
-                Create Event
+                <Link href="/dashboard/events">
+                  Create Event
+                </Link>
               </Button>
-            </div>
-
-            <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-8 pt-6 lg:pt-8">
-              <div className="flex items-center space-x-2">
-                <Calendar className="h-5 w-5 text-orange-500" />
-                <span className="text-slate-300">1000+ Events</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Users className="h-5 w-5 text-orange-500" />
-                <span className="text-slate-300">50k+ Members</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <MapPin className="h-5 w-5 text-orange-500" />
-                <span className="text-slate-300">100+ Cities</span>
-              </div>
             </div>
           </div>
 

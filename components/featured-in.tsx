@@ -1,9 +1,9 @@
 export function FeaturedIn() {
   const stats = [
-    { number: "50K+", label: "Events Hosted" },
-    { number: "2M+", label: "Happy Attendees" },
-    { number: "10K+", label: "Event Organizers" },
-    { number: "150+", label: "Cities Worldwide" },
+    { number: "1K+", label: "Events Hosted" },
+    { number: "24K+", label: "Happy Attendees" },
+    { number: "120+", label: "Event Organizers" },
+    { number: "20+", label: "Cities Worldwide" },
   ]
 
   return (
@@ -15,7 +15,7 @@ export function FeaturedIn() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="text-4xl font-bold text-blue-400 mb-2">{stat.number}</div>
+                <div className="text-4xl font-bold text-orange-500 mb-2">{stat.number}</div>
                 <div className="text-slate-300 text-sm">{stat.label}</div>
               </div>
             ))}
