@@ -1,5 +1,5 @@
 import type React from "react"
-import { DashboardLayout } from "@/components/dashboard-layout"
+import { DashboardLayout } from "@/components/dashboard/dashboard-layout"
 
 export default function DashboardLayoutPage({
   children,

@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { Eye, EyeOff, Mail, Lock, User, ArrowLeft, Check } from "lucide-react"
-import { GoogleIcon } from "./icons/google-icon"
+import { GoogleIcon } from "../icons/google-icon"
 import { Label } from "@/components/ui/label"
 
 export function RegisterForm() {
@@ -238,12 +238,12 @@ export function RegisterForm() {
                       <div
                         key={i}
                         className={`h-1 flex-1 rounded ${i < passwordStrength
-                            ? passwordStrength <= 2
-                              ? "bg-red-500"
-                              : passwordStrength <= 3
-                                ? "bg-yellow-500"
-                                : "bg-green-500"
-                            : "bg-slate-600"
+                          ? passwordStrength <= 2
+                            ? "bg-red-500"
+                            : passwordStrength <= 3
+                              ? "bg-yellow-500"
+                              : "bg-green-500"
+                          : "bg-slate-600"
                           }`}
                       />
                     ))}

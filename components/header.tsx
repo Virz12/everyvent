@@ -30,9 +30,6 @@ export function Header() {
         {/* User Actions */}
         <div className="flex items-center space-x-4">
           <Button variant="ghost" size="icon" className="text-slate-300 hover:text-white">
-            <Bell className="h-5 w-5" />
-          </Button>
-          <Button variant="ghost" size="icon" className="text-slate-300 hover:text-white">
             <User className="h-5 w-5" />
           </Button>
           <Link href="/auth/signin">

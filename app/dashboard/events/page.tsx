@@ -1,4 +1,4 @@
-import { MyEventsPage } from "@/components/my-events-page"
+import { MyEventsPage } from "@/components/dashboard/my-events-page"
 
 export default function EventsPage() {
   return <MyEventsPage />

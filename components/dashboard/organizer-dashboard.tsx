@@ -9,7 +9,7 @@ import { Plus, Calendar, Users, Edit, Trash2, Eye } from "lucide-react"
 import { CreateEventModal } from "./create-event-modal"
 import { EditEventModal } from "./edit-event-modal"
 import { DeleteEventDialog } from "./delete-event-dialog"
-import { DashboardLayout } from "@/components/dashboard-layout"
+import { DashboardLayout } from "@/components/dashboard/dashboard-layout"
 
 // Mock user data - in real app this would come from auth context
 const currentUser = {
