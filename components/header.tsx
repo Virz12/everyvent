@@ -1,20 +1,18 @@
 "use client"
 
-import { Menu, User, Bell } from "lucide-react"
+import { Menu, User } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import Image from "next/image"
 
 export function Header() {
   return (
-    <header className="bg-slate-900 border-b border-slate-800 px-4 lg:px-6">
+    <header className="bg-slate-900 fixed w-full z-50 border-b border-slate-800 px-4 lg:px-6">
       <div className="container mx-auto flex h-16 items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center space-x-2">
-          <div className="h-8 w-8 bg-orange-500 rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold text-sm">E</span>
-          </div>
-          <span className="text-white font-semibold text-xl">EventHub</span>
+          <Image src={"/logo.avif"} width={128} height={64} alt="Everyvent logo" />
         </Link>
 
         {/* Desktop Navigation */}
@@ -29,11 +27,11 @@ export function Header() {
 
         {/* User Actions */}
         <div className="flex items-center space-x-4">
-          <Button variant="ghost" size="icon" className="text-slate-300 hover:text-white">
+          <Button variant="ghost" size="icon" className="text-slate-300 hover:text-slate-300 cursor-pointer">
             <User className="h-5 w-5" />
           </Button>
           <Link href="/signin">
-            <Button className="bg-orange-500 hover:bg-orange-600 text-white">Sign In</Button>
+            <Button className="bg-orange-500 hover:bg-orange-600 text-white cursor-pointer">Sign In</Button>
           </Link>
 
           {/* Mobile Menu */}
@@ -44,7 +42,7 @@ export function Header() {
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="bg-slate-900 border-slate-800">
-              <nav className="flex flex-col space-y-4 mt-8">
+              <nav className="flex flex-col space-y-4 mt-8 px-6 pt-8">
                 <Link href="/events" className="text-slate-300 hover:text-white transition-colors">
                   Events
                 </Link>

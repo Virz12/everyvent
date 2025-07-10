@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react"
+import { Mail, Phone, MapPin } from "lucide-react"
+import Image from "next/image"
 
 export function Footer() {
   return (
@@ -10,28 +11,14 @@ export function Footer() {
           {/* Company Info */}
           <div className="space-y-6">
             <div className="flex items-center space-x-2">
-              <div className="h-8 w-8 bg-orange-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">E</span>
+              <div className="h-8 w-8 rounded-lg flex items-center justify-center">
+                <Image src={"/icon.avif"} width={32} height={32} alt="Everyvent Icon" />
               </div>
-              <span className="text-white font-semibold text-xl">EventHub</span>
+              <span className="text-orange-500 font-semibold text-xl">Everyvent</span>
             </div>
             <p className="text-slate-300 leading-relaxed">
               Connecting communities through amazing events. Discover, create, and join events that matter to you.
             </p>
-            <div className="flex space-x-4">
-              <Button variant="ghost" size="icon" className="text-slate-400 hover:text-white">
-                <Facebook className="h-5 w-5" />
-              </Button>
-              <Button variant="ghost" size="icon" className="text-slate-400 hover:text-white">
-                <Twitter className="h-5 w-5" />
-              </Button>
-              <Button variant="ghost" size="icon" className="text-slate-400 hover:text-white">
-                <Instagram className="h-5 w-5" />
-              </Button>
-              <Button variant="ghost" size="icon" className="text-slate-400 hover:text-white">
-                <Linkedin className="h-5 w-5" />
-              </Button>
-            </div>
           </div>
 
           {/* Quick Links */}
@@ -46,12 +33,6 @@ export function Footer() {
               </Link>
               <Link href="/about" className="text-slate-300 hover:text-white transition-colors">
                 About Us
-              </Link>
-              <Link href="/pricing" className="text-slate-300 hover:text-white transition-colors">
-                Pricing
-              </Link>
-              <Link href="/blog" className="text-slate-300 hover:text-white transition-colors">
-                Blog
               </Link>
             </nav>
           </div>
@@ -84,7 +65,7 @@ export function Footer() {
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <Mail className="h-4 w-4 text-orange-500" />
-                <span className="text-slate-300">hello@eventhub.com</span>
+                <span className="text-slate-300">hello@Everyvent.com</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="h-4 w-4 text-orange-500" />
@@ -95,36 +76,13 @@ export function Footer() {
                 <span className="text-slate-300">San Francisco, CA</span>
               </div>
             </div>
-
-            <div className="space-y-3">
-              <h4 className="text-white font-medium">Download Event App</h4>
-              <div className="flex space-x-3">
-                <Button variant="outline" size="sm" className="border-slate-600 text-slate-300 bg-transparent">
-                  App Store
-                </Button>
-                <Button variant="outline" size="sm" className="border-slate-600 text-slate-300 bg-transparent">
-                  Google Play
-                </Button>
-              </div>
-            </div>
           </div>
         </div>
 
         {/* Bottom Bar */}
         <div className="border-t border-slate-800 pt-8">
           <div className="flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0">
-            <div className="text-slate-400 text-sm">© 2024 EventHub. All rights reserved.</div>
-            <nav className="flex space-x-6 text-sm">
-              <Link href="/privacy" className="text-slate-400 hover:text-white transition-colors">
-                Privacy Policy
-              </Link>
-              <Link href="/terms" className="text-slate-400 hover:text-white transition-colors">
-                Terms of Service
-              </Link>
-              <Link href="/cookies" className="text-slate-400 hover:text-white transition-colors">
-                Cookie Policy
-              </Link>
-            </nav>
+            <div className="text-slate-400 text-sm">© 2024 Everyvent. All rights reserved.</div>
           </div>
         </div>
       </div>
