@@ -20,7 +20,7 @@ const events = [
     rating: 4.8,
     attendees: 24,
     maxAttendees: 30,
-    image: "/placeholder.svg?height=200&width=300",
+    image: "https://placehold.co/300x200",
     featured: true,
     description: "Interactive strategy planning session for teams",
   },
@@ -36,7 +36,7 @@ const events = [
     rating: 4.9,
     attendees: 156,
     maxAttendees: 200,
-    image: "/placeholder.svg?height=200&width=300",
+    image: "https://placehold.co/300x200",
     description: "Build stronger team connections through collaborative activities",
   },
   {
@@ -51,7 +51,7 @@ const events = [
     rating: 4.7,
     attendees: 89,
     maxAttendees: 100,
-    image: "/placeholder.svg?height=200&width=300",
+    image: "https://placehold.co/300x200",
     description: "Innovative team building activities for modern workplaces",
   },
   {
@@ -66,7 +66,7 @@ const events = [
     rating: 4.6,
     attendees: 167,
     maxAttendees: 200,
-    image: "/placeholder.svg?height=200&width=300",
+    image: "https://placehold.co/300x200",
     description: "Connect with industry professionals in a relaxed setting",
   },
   {
@@ -81,7 +81,7 @@ const events = [
     rating: 4.9,
     attendees: 32,
     maxAttendees: 40,
-    image: "/placeholder.svg?height=200&width=300",
+    image: "https://placehold.co/300x200",
     description: "Intensive leadership development for executives",
   },
   {
@@ -96,7 +96,7 @@ const events = [
     rating: 4.8,
     attendees: 145,
     maxAttendees: 200,
-    image: "/placeholder.svg?height=200&width=300",
+    image: "https://placehold.co/300x200",
     description: "Celebrate company achievements with your team",
   },
   {
@@ -111,7 +111,7 @@ const events = [
     rating: 4.7,
     attendees: 234,
     maxAttendees: 300,
-    image: "/placeholder.svg?height=200&width=300",
+    image: "https://placehold.co/300x200",
     description: "End the year with a festive celebration",
   },
   {
@@ -126,7 +126,7 @@ const events = [
     rating: 4.9,
     attendees: 56,
     maxAttendees: 80,
-    image: "/placeholder.svg?height=200&width=300",
+    image: "https://placehold.co/300x200",
     description: "Strategic planning retreat in a beautiful mountain setting",
   },
 ]
@@ -200,9 +200,8 @@ export function EventsGrid() {
           {filteredAndSortedEvents.map((event) => (
             <Card
               key={event.id}
-              className={`bg-slate-800 border-slate-700 overflow-hidden hover:bg-slate-750 transition-colors ${
-                viewMode === "list" ? "flex" : ""
-              }`}
+              className={`bg-slate-800 border-slate-700 overflow-hidden hover:bg-slate-750 transition-colors ${viewMode === "list" ? "flex" : ""
+                }`}
             >
               <div className={`relative ${viewMode === "list" ? "w-64 shrink-0" : ""}`}>
                 <img

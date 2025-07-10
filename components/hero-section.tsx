@@ -51,7 +51,7 @@ export function HeroSection() {
           <div className="relative">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <img
-                src="/placeholder.svg?height=500&width=700"
+                src="https://placehold.co/700x500"
                 alt="Team collaboration and networking at events"
                 className="w-full h-64 sm:h-80 lg:h-96 object-cover"
               />

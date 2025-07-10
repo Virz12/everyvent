@@ -28,7 +28,7 @@ export function CreateEventModal({ isOpen, onClose, onSubmit }: CreateEventModal
     location: "",
     maxAttendees: "",
     status: "draft",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "https://placehold.co/300x200",
   })
 
   const [errors, setErrors] = useState<Record<string, string>>({})
@@ -77,7 +77,7 @@ export function CreateEventModal({ isOpen, onClose, onSubmit }: CreateEventModal
         location: "",
         maxAttendees: "",
         status: "draft",
-        image: "/placeholder.svg?height=200&width=300",
+        image: "https://placehold.co/300x200",
       })
       setErrors({})
     }

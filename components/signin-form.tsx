@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { Eye, EyeOff, Mail, Lock, ArrowLeft } from "lucide-react"
-import { GoogleIcon } from "./google-icon"
+import { GoogleIcon } from "./icons/google-icon"
 
 export function SignInForm() {
   const [showPassword, setShowPassword] = useState(false)

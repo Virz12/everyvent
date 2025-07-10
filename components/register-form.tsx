@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { Eye, EyeOff, Mail, Lock, User, ArrowLeft, Check } from "lucide-react"
-import { GoogleIcon } from "./google-icon"
+import { GoogleIcon } from "./icons/google-icon"
 import { Label } from "@/components/ui/label"
 
 export function RegisterForm() {
@@ -176,9 +176,8 @@ export function RegisterForm() {
                   value={formData.name}
                   onChange={(e) => handleInputChange("name", e.target.value)}
                   placeholder="Enter your full name"
-                  className={`pl-10 bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 h-12 ${
-                    errors.name ? "border-red-500" : ""
-                  }`}
+                  className={`pl-10 bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 h-12 ${errors.name ? "border-red-500" : ""
+                    }`}
                 />
               </div>
               {errors.name && <p className="text-red-400 text-sm">{errors.name}</p>}
@@ -198,9 +197,8 @@ export function RegisterForm() {
                   value={formData.email}
                   onChange={(e) => handleInputChange("email", e.target.value)}
                   placeholder="Enter your email"
-                  className={`pl-10 bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 h-12 ${
-                    errors.email ? "border-red-500" : ""
-                  }`}
+                  className={`pl-10 bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 h-12 ${errors.email ? "border-red-500" : ""
+                    }`}
                 />
               </div>
               {errors.email && <p className="text-red-400 text-sm">{errors.email}</p>}
@@ -220,9 +218,8 @@ export function RegisterForm() {
                   value={formData.password}
                   onChange={(e) => handleInputChange("password", e.target.value)}
                   placeholder="Create a password"
-                  className={`pl-10 pr-10 bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 h-12 ${
-                    errors.password ? "border-red-500" : ""
-                  }`}
+                  className={`pl-10 pr-10 bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 h-12 ${errors.password ? "border-red-500" : ""
+                    }`}
                 />
                 <button
                   type="button"
@@ -240,15 +237,14 @@ export function RegisterForm() {
                     {[...Array(5)].map((_, i) => (
                       <div
                         key={i}
-                        className={`h-1 flex-1 rounded ${
-                          i < passwordStrength
+                        className={`h-1 flex-1 rounded ${i < passwordStrength
                             ? passwordStrength <= 2
                               ? "bg-red-500"
                               : passwordStrength <= 3
                                 ? "bg-yellow-500"
                                 : "bg-green-500"
                             : "bg-slate-600"
-                        }`}
+                          }`}
                       />
                     ))}
                   </div>
@@ -275,9 +271,8 @@ export function RegisterForm() {
                   value={formData.confirmPassword}
                   onChange={(e) => handleInputChange("confirmPassword", e.target.value)}
                   placeholder="Confirm your password"
-                  className={`pl-10 pr-10 bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 h-12 ${
-                    errors.confirmPassword ? "border-red-500" : ""
-                  }`}
+                  className={`pl-10 pr-10 bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 h-12 ${errors.confirmPassword ? "border-red-500" : ""
+                    }`}
                 />
                 <button
                   type="button"
@@ -337,9 +332,8 @@ export function RegisterForm() {
                     className="sr-only"
                   />
                   <div
-                    className={`w-5 h-5 rounded border-2 flex items-center justify-center ${
-                      formData.agreeToTerms ? "bg-orange-500 border-orange-500" : "border-slate-600 bg-slate-700"
-                    }`}
+                    className={`w-5 h-5 rounded border-2 flex items-center justify-center ${formData.agreeToTerms ? "bg-orange-500 border-orange-500" : "border-slate-600 bg-slate-700"
+                      }`}
                   >
                     {formData.agreeToTerms && <Check className="h-3 w-3 text-white" />}
                   </div>

@@ -46,19 +46,19 @@ export function AboutPage() {
     {
       name: "Sarah Johnson",
       role: "CEO & Founder",
-      image: "/placeholder.svg?height=200&width=200",
+      image: "https://placehold.co/200x200",
       description: "Former event organizer with 10+ years of experience in community building.",
     },
     {
       name: "Michael Chen",
       role: "CTO",
-      image: "/placeholder.svg?height=200&width=200",
+      image: "https://placehold.co/200x200",
       description: "Tech leader passionate about creating seamless user experiences.",
     },
     {
       name: "Emily Rodriguez",
       role: "Head of Community",
-      image: "/placeholder.svg?height=200&width=200",
+      image: "https://placehold.co/200x200",
       description: "Community expert dedicated to fostering meaningful connections.",
     },
   ]
@@ -150,7 +150,7 @@ export function AboutPage() {
             </div>
             <div className="relative">
               <img
-                src="/placeholder.svg?height=400&width=500"
+                src="https://placehold.co/500x400"
                 alt="Team collaboration"
                 className="w-full h-auto rounded-2xl"
               />

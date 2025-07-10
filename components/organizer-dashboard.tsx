@@ -34,7 +34,7 @@ const initialEvents = [
     maxAttendees: 30,
     status: "published",
     description: "Interactive strategy planning session for teams",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "https://placehold.co/300x200",
     createdAt: "2024-11-01",
   },
   {
@@ -49,7 +49,7 @@ const initialEvents = [
     maxAttendees: 25,
     status: "draft",
     description: "Fun team building activities and exercises",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "https://placehold.co/300x200",
     createdAt: "2024-11-05",
   },
   {
@@ -64,7 +64,7 @@ const initialEvents = [
     maxAttendees: 50,
     status: "published",
     description: "Executive leadership development summit",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "https://placehold.co/300x200",
     createdAt: "2024-10-28",
   },
 ]

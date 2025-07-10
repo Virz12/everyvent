@@ -57,7 +57,7 @@ export function HowItWorks() {
           </div>
 
           <div className="relative">
-            <img src="/placeholder.svg?height=400&width=500" alt="How it works" className="w-full h-auto rounded-2xl" />
+            <img src="https://placehold.co/500x400" alt="How it works" className="w-full h-auto rounded-2xl" />
           </div>
         </div>
       </div>

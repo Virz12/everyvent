@@ -26,7 +26,7 @@ const registeredEvents = [
     location: "San Francisco, CA",
     organizer: "TechCorp Events",
     status: "confirmed",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "https://placehold.co/300x200",
     description: "Interactive strategy planning session for teams",
   },
   {
@@ -39,7 +39,7 @@ const registeredEvents = [
     location: "Seattle, WA",
     organizer: "Seattle Business Network",
     status: "confirmed",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "https://placehold.co/300x200",
     description: "Connect with industry professionals in a relaxed setting",
   },
   {
@@ -52,7 +52,7 @@ const registeredEvents = [
     location: "Boston, MA",
     organizer: "Innovation Labs",
     status: "pending",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "https://placehold.co/300x200",
     description: "Foster innovation and creativity in your team",
   },
 ]
@@ -70,7 +70,7 @@ const recommendedEvents = [
     organizer: "Leadership Institute",
     attendees: 45,
     maxAttendees: 50,
-    image: "/placeholder.svg?height=200&width=300",
+    image: "https://placehold.co/300x200",
     description: "Strategic planning for senior executives",
   },
   {
@@ -84,7 +84,7 @@ const recommendedEvents = [
     organizer: "Women in Tech SF",
     attendees: 123,
     maxAttendees: 150,
-    image: "/placeholder.svg?height=200&width=300",
+    image: "https://placehold.co/300x200",
     description: "Empowering women in technology through networking",
   },
 ]
