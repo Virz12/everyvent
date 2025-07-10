@@ -55,7 +55,7 @@ export function HeroSection() {
                 alt="Team collaboration and networking at events"
                 className="w-full h-64 sm:h-80 lg:h-96 object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-slate-900/20 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-slate-900/20 to-transparent" />
 
               {/* Floating elements for visual interest */}
               <div className="absolute top-4 right-4 bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2">

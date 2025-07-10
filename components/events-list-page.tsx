@@ -395,7 +395,7 @@ export function EventsListPage() {
                   viewMode === "list" ? "flex" : ""
                 }`}
               >
-                <div className={`relative ${viewMode === "list" ? "w-64 flex-shrink-0" : ""}`}>
+                <div className={`relative ${viewMode === "list" ? "w-64 shrink-0" : ""}`}>
                   <img
                     src={event.image || "/placeholder.svg"}
                     alt={event.title}

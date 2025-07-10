@@ -63,7 +63,7 @@ export function FAQ() {
           </div>
 
           <div className="relative">
-            <div className="bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl p-8 text-center">
+            <div className="bg-linear-to-br from-orange-500 to-red-600 rounded-2xl p-8 text-center">
               <div className="grid grid-cols-3 gap-4 mb-6">
                 {[...Array(9)].map((_, i) => (
                   <div key={i} className="bg-white/20 rounded-lg h-16 flex items-center justify-center">

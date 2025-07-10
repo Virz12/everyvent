@@ -38,7 +38,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
       >
         <div className="flex flex-col h-full">
           {/* Logo */}
-          <div className="flex items-center justify-between h-16 px-6 border-b border-slate-700 flex-shrink-0">
+          <div className="flex items-center justify-between h-16 px-6 border-b border-slate-700 shrink-0">
             <Link href="/" className="flex items-center space-x-2">
               <div className="h-8 w-8 bg-orange-500 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">E</span>
@@ -56,7 +56,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
           </div>
 
           {/* User Info */}
-          <div className="px-6 py-4 border-b border-slate-700 flex-shrink-0">
+          <div className="px-6 py-4 border-b border-slate-700 shrink-0">
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center">
                 <span className="text-white font-semibold text-sm">JD</span>
@@ -89,7 +89,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
           </nav>
 
           {/* Sign Out - Fixed at bottom */}
-          <div className="px-4 py-4 border-t border-slate-700 flex-shrink-0">
+          <div className="px-4 py-4 border-t border-slate-700 shrink-0">
             <Button variant="ghost" className="w-full text-slate-300 hover:text-white hover:bg-slate-700">
               <LogOut className="h-4 w-4 mr-2" />
               Sign Out

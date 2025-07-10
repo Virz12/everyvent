@@ -41,7 +41,7 @@ export function HowItWorks() {
             <div className="space-y-6">
               {steps.map((step, index) => (
                 <div key={index} className="flex items-start space-x-4">
-                  <div className="flex-shrink-0 w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center">
+                  <div className="shrink-0 w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center">
                     <step.icon className="h-6 w-6 text-white" />
                   </div>
                   <div className="space-y-2">
