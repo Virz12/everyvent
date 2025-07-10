@@ -363,7 +363,7 @@ export function RegisterForm() {
 
           <div className="text-center">
             <span className="text-slate-300">Already have an account? </span>
-            <Link href="/auth/signin" className="text-orange-500 hover:text-orange-400 transition-colors font-medium">
+            <Link href="/signin" className="text-orange-500 hover:text-orange-400 transition-colors font-medium">
               Sign in
             </Link>
           </div>

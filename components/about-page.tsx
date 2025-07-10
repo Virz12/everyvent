@@ -92,7 +92,7 @@ export function AboutPage() {
                 Explore Events
               </Button>
             </Link>
-            <Link href="/auth/signin">
+            <Link href="/signin">
               <Button
                 size="lg"
                 variant="outline"
@@ -232,7 +232,7 @@ export function AboutPage() {
                 Browse Events
               </Button>
             </Link>
-            <Link href="/auth/register">
+            <Link href="/register">
               <Button
                 size="lg"
                 variant="outline"

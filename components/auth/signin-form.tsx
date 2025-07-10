@@ -159,12 +159,6 @@ export function SignInForm() {
                 />
                 <span className="text-sm text-slate-300">Remember me</span>
               </label>
-              <Link
-                href="/auth/forgot-password"
-                className="text-sm text-orange-500 hover:text-orange-400 transition-colors"
-              >
-                Forgot password?
-              </Link>
             </div>
 
             <Button
@@ -178,7 +172,7 @@ export function SignInForm() {
 
           <div className="text-center">
             <span className="text-slate-300">Don't have an account? </span>
-            <Link href="/auth/register" className="text-orange-500 hover:text-orange-400 transition-colors font-medium">
+            <Link href="/register" className="text-orange-500 hover:text-orange-400 transition-colors font-medium">
               Sign up
             </Link>
           </div>

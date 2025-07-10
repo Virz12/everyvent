@@ -32,7 +32,7 @@ export function Header() {
           <Button variant="ghost" size="icon" className="text-slate-300 hover:text-white">
             <User className="h-5 w-5" />
           </Button>
-          <Link href="/auth/signin">
+          <Link href="/signin">
             <Button className="bg-orange-500 hover:bg-orange-600 text-white">Sign In</Button>
           </Link>
 
