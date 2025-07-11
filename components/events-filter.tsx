@@ -31,7 +31,7 @@ export function EventsFilter({
     <div className="space-y-8">
       {/* Category Tabs */}
       <div className="relative">
-        <div className="flex flex-wrap gap-2 lg:gap-4">
+        <div className="flex overflow-x-auto scrollbar py-4 gap-2 lg:gap-4">
           {categories.map((category) => {
             const Icon = category.icon
             const isActive = activeCategory === category.id

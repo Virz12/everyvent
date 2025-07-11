@@ -120,3 +120,21 @@
     @apply bg-slate-900 text-foreground;
   }
 }
+
+@layer components {
+  .scrollbar::-webkit-scrollbar {
+    @apply h-4 w-4;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    @apply rounded-full bg-slate-700;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-orange-500 rounded-full border-4 border-slate-700;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-orange-600;
+  }
+}
