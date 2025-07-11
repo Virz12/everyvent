@@ -1,12 +1,11 @@
 'use client'
 
 import { useState, useMemo } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Calendar, MapPin, Users, Search } from "lucide-react"
+import { Search } from "lucide-react"
 import { EventsFilter } from "@/components/events-filter"
+import EventCard from "@/components/event-card"
 
 // Extended events data with more variety
 const allEvents = [
@@ -28,7 +27,109 @@ const allEvents = [
     organizer: "TechCorp Events",
   },
   {
-    id: 2,
+    id: 21,
+    title: "Strategy Workshop",
+    category: "team-building",
+    date: "2024-12-15",
+    time: "2:00 PM",
+    duration: "2-4 hours",
+    location: "San Francisco, CA",
+    price: 250,
+    rating: 4.8,
+    attendees: 24,
+    maxAttendees: 30,
+    image: "https://placehold.co/300x200",
+    featured: true,
+    description: "Interactive strategy planning session for teams",
+    organizer: "TechCorp Events",
+  },
+  {
+    id: 31,
+    title: "Strategy Workshop",
+    category: "team-building",
+    date: "2024-12-15",
+    time: "2:00 PM",
+    duration: "2-4 hours",
+    location: "San Francisco, CA",
+    price: 250,
+    rating: 4.8,
+    attendees: 24,
+    maxAttendees: 30,
+    image: "https://placehold.co/300x200",
+    featured: true,
+    description: "Interactive strategy planning session for teams",
+    organizer: "TechCorp Events",
+  },
+  {
+    id: 41,
+    title: "Strategy Workshop",
+    category: "team-building",
+    date: "2024-12-15",
+    time: "2:00 PM",
+    duration: "2-4 hours",
+    location: "San Francisco, CA",
+    price: 250,
+    rating: 4.8,
+    attendees: 24,
+    maxAttendees: 30,
+    image: "https://placehold.co/300x200",
+    featured: true,
+    description: "Interactive strategy planning session for teams",
+    organizer: "TechCorp Events",
+  },
+  {
+    id: 51,
+    title: "Strategy Workshop",
+    category: "team-building",
+    date: "2024-12-15",
+    time: "2:00 PM",
+    duration: "2-4 hours",
+    location: "San Francisco, CA",
+    price: 250,
+    rating: 4.8,
+    attendees: 24,
+    maxAttendees: 30,
+    image: "https://placehold.co/300x200",
+    featured: true,
+    description: "Interactive strategy planning session for teams",
+    organizer: "TechCorp Events",
+  },
+  {
+    id: 61,
+    title: "Strategy Workshop",
+    category: "team-building",
+    date: "2024-12-15",
+    time: "2:00 PM",
+    duration: "2-4 hours",
+    location: "San Francisco, CA",
+    price: 250,
+    rating: 4.8,
+    attendees: 24,
+    maxAttendees: 30,
+    image: "https://placehold.co/300x200",
+    featured: true,
+    description: "Interactive strategy planning session for teams",
+    organizer: "TechCorp Events",
+  },
+  {
+    id: 71,
+    title: "Strategy Workshop",
+    category: "team-building",
+    date: "2024-12-15",
+    time: "2:00 PM",
+    duration: "2-4 hours",
+    location: "San Francisco, CA",
+    price: 250,
+    rating: 4.8,
+    attendees: 24,
+    maxAttendees: 30,
+    image: "https://placehold.co/300x200",
+    featured: true,
+    description: "Interactive strategy planning session for teams",
+    organizer: "TechCorp Events",
+  },
+  {
+    id: 82,
     title: "Synergy Session: Team Building",
     category: "team-building",
     date: "2024-12-18",
@@ -44,7 +145,7 @@ const allEvents = [
     organizer: "Team Dynamics Inc",
   },
   {
-    id: 3,
+    id: 93,
     title: "Team Building New Meeting",
     category: "team-building",
     date: "2024-12-20",
@@ -253,8 +354,18 @@ const allEvents = [
   },
 ]
 
-type SortOption = "popularity" | "date"
+interface SearchBarProps {
+  searchQuery: string
+  setSearchQuery: React.Dispatch<React.SetStateAction<string>>
+}
 
+interface PaginationProps {
+  currentPage: number
+  totalPages: number
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>
+}
+
+type SortOption = "popularity" | "date"
 
 export default function EventsListPage() {
   const [activeCategory, setActiveCategory] = useState("team-building")
@@ -262,9 +373,6 @@ export default function EventsListPage() {
   const [searchQuery, setSearchQuery] = useState("")
   const [currentPage, setCurrentPage] = useState(1)
   const eventsPerPage = 9
-
-  // Get unique locations for filter
-  // const locations = Array.from(new Set(allEvents.map((event) => event.location)))
 
   const filteredAndSortedEvents = useMemo(() => {
     let filtered = allEvents
@@ -303,50 +411,26 @@ export default function EventsListPage() {
   const totalPages = Math.ceil(filteredAndSortedEvents.length / eventsPerPage)
   const paginatedEvents = filteredAndSortedEvents.slice((currentPage - 1) * eventsPerPage, currentPage * eventsPerPage)
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString)
-    return date.toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    })
-  }
-
-  const getDaysUntilEvent = (dateString: string) => {
-    const eventDate = new Date(dateString)
-    const today = new Date()
-    const diffTime = eventDate.getTime() - today.getTime()
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-
-    if (diffDays === 0) return "Today"
-    if (diffDays === 1) return "Tomorrow"
-    if (diffDays > 0) return `${diffDays} days`
-    return "Past event"
-  }
-
   return (
     <div className="min-h-screen bg-slate-900">
       {/* Hero Section */}
-      <div className="bg-slate-900 py-8 px-4 lg:px-6 border-b border-slate-800">
-        <div className="container mx-auto">
-          <h1 className="text-3xl lg:text-4xl font-bold text-white mb-2">All Events</h1>
-          <p className="text-slate-300">Discover and join amazing events in your area</p>
+      <section className="bg-slate-900 pt-20 px-4 lg:px-6">
+        <div className="container mx-auto text-left">
+          <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6">
+            Find many
+            <br />
+            <span className="text-orange-500">Cool Events</span>
+          </h1>
+          <p className="text-xl text-slate-300 mb-8 max-w-3xl">
+            Discover and join amazing events in your area
+          </p>
         </div>
-      </div>
+      </section>
 
       <section className="py-12 px-4 lg:px-6">
         <div className="container mx-auto">
-          <div className="mb-8">
-            <div className="relative max-w-2xl">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
-              <Input
-                placeholder="Search events, organizers, or descriptions..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 bg-slate-800 border-slate-700 text-white placeholder:text-slate-400 h-12"
-              />
-            </div>
-          </div>
+          {/* Search Bar */}
+          <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
           <EventsFilter
             onCategoryChange={(category) => {
@@ -373,113 +457,13 @@ export default function EventsListPage() {
 
           <div className="mb-12 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {paginatedEvents.map((event) => (
-              <Card
-                key={event.id}
-                className="bg-slate-800 border-slate-700 overflow-hidden hover:scale-[1.02] hover:bg-slate-750 transition-all"
-              >
-                <div className="relative">
-                  <img
-                    src={event.image || "/placeholder.svg"}
-                    alt={event.title}
-                    className="object-cover w-full h-48"
-                  />
-                </div>
-
-                <CardContent className="p-6">
-                  <div className="space-y-4">
-                    <div className="flex items-start justify-between">
-                      <div className="space-y-2">
-                        <div className="flex items-center space-x-2">
-                          <Badge variant="secondary" className="bg-slate-700 text-slate-300 text-xs">
-                            {event.duration}
-                          </Badge>
-                          <span className="text-slate-400 text-xs">{getDaysUntilEvent(event.date)}</span>
-                        </div>
-                        <h3 className="text-white font-semibold text-lg leading-tight">{event.title}</h3>
-                      </div>
-                    </div>
-
-                    <div className="space-y-2 text-sm text-slate-300">
-                      <div className="flex items-center space-x-2">
-                        <Calendar className="h-4 w-4 text-orange-500" />
-                        <span>
-                          {formatDate(event.date)} at {event.time}
-                        </span>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <MapPin className="h-4 w-4 text-orange-500" />
-                        <span>{event.location}</span>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <Users className="h-4 w-4 text-orange-500" />
-                        <span>
-                          {event.attendees}/{event.maxAttendees} attending
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center justify-between pt-4">
-                      <span className="text-white font-semibold text-lg">Free</span>
-                      <Button size="sm" className="bg-orange-500 hover:bg-orange-600 text-white">
-                        Join Event
-                      </Button>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+              <EventCard key={event.id} event={event} />
             ))}
           </div>
 
           {/* Keep existing pagination */}
           {totalPages > 1 && (
-            <div className="flex justify-center items-center space-x-2">
-              <Button
-                variant="outline"
-                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                disabled={currentPage === 1}
-                className="border-slate-600 text-slate-300 hover:bg-slate-800 bg-transparent"
-              >
-                Previous
-              </Button>
-
-              <div className="flex space-x-1">
-                {[...Array(totalPages)].map((_, i) => {
-                  const page = i + 1
-                  if (page === currentPage || page === 1 || page === totalPages || Math.abs(page - currentPage) <= 1) {
-                    return (
-                      <Button
-                        key={page}
-                        variant={page === currentPage ? "default" : "outline"}
-                        onClick={() => setCurrentPage(page)}
-                        className={
-                          page === currentPage
-                            ? "bg-orange-500 hover:bg-orange-600 text-white"
-                            : "border-slate-600 text-slate-300 hover:bg-slate-800 bg-transparent"
-                        }
-                      >
-                        {page}
-                      </Button>
-                    )
-                  } else if (page === currentPage - 2 || page === currentPage + 2) {
-                    return (
-                      <span key={page} className="text-slate-400 px-2">
-                        ...
-                      </span>
-                    )
-                  }
-                  return null
-                })}
-              </div>
-
-              <Button
-                variant="outline"
-                onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-                disabled={currentPage === totalPages}
-                className="border-slate-600 text-slate-300 hover:bg-slate-800 bg-transparent"
-              >
-                Next
-              </Button>
-            </div>
+            <Pagination currentPage={currentPage} totalPages={totalPages} setCurrentPage={setCurrentPage} />
           )}
 
           {/* No Results */}
@@ -492,7 +476,7 @@ export default function EventsListPage() {
                   setSearchQuery("")
                   setActiveCategory("team-building")
                 }}
-                className="mt-4 bg-orange-500 hover:bg-orange-600 text-white"
+                className="mt-4 bg-orange-500 hover:bg-orange-600 text-white cursor-pointer"
               >
                 Clear All Filters
               </Button>
@@ -500,6 +484,75 @@ export default function EventsListPage() {
           )}
         </div>
       </section>
+    </div>
+  )
+}
+
+export function SearchBar({ searchQuery, setSearchQuery }: SearchBarProps) {
+  return (
+    <div className="mb-8">
+      <div className="relative max-w-2xl">
+        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
+        <Input
+          placeholder="Search events, organizers, or descriptions..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="pl-10 bg-slate-800 border-slate-700 text-white placeholder:text-slate-400 h-12"
+        />
+      </div>
+    </div>
+  )
+}
+
+export function Pagination({ currentPage, totalPages, setCurrentPage }: PaginationProps) {
+  return (
+    <div className="flex justify-center items-center space-x-2">
+      <Button
+        variant="outline"
+        onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+        disabled={currentPage === 1}
+        className="border-slate-600 text-slate-300 hover:bg-slate-800 bg-transparent"
+      >
+        Previous
+      </Button>
+
+      <div className="flex space-x-1">
+        {[...Array(totalPages)].map((_, i) => {
+          const page = i + 1
+          if (page === currentPage || page === 1 || page === totalPages || Math.abs(page - currentPage) <= 1) {
+            return (
+              <Button
+                key={page}
+                variant={page === currentPage ? "default" : "outline"}
+                onClick={() => setCurrentPage(page)}
+                className={
+                  page === currentPage
+                    ? "bg-orange-500 hover:bg-orange-600 text-white"
+                    : "border-slate-600 text-slate-300 hover:bg-slate-800 bg-transparent"
+                }
+              >
+                {page}
+              </Button>
+            )
+          } else if (page === currentPage - 2 || page === currentPage + 2) {
+            return (
+              <span key={page} className="text-slate-400 px-2">
+                ...
+              </span>
+            )
+          }
+          return null
+        })}
+      </div>
+
+      <Button
+        variant="outline"
+        onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+        disabled={currentPage === totalPages}
+        className="border-slate-600 text-slate-300 hover:bg-slate-800 bg-transparent"
+      >
+        Next
+      </Button>
     </div>
   )
 }
