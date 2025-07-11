@@ -52,7 +52,7 @@ export function FAQ() {
                 value={`item-${index}`}
                 className="bg-slate-900 border-slate-700 rounded-lg px-6"
               >
-                <AccordionTrigger className="text-white hover:text-orange-500 text-left">
+                <AccordionTrigger className="text-white hover:text-orange-500 text-left cursor-pointer">
                   {faq.question}
                 </AccordionTrigger>
                 <AccordionContent className="text-slate-300">{faq.answer}</AccordionContent>

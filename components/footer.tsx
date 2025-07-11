@@ -11,10 +11,9 @@ export function Footer() {
           {/* Company Info */}
           <div className="space-y-6">
             <div className="flex items-center space-x-2">
-              <div className="h-8 w-8 rounded-lg flex items-center justify-center">
-                <Image src={"/icon.avif"} width={32} height={32} alt="Everyvent Icon" />
+              <div className="rounded-lg flex items-center justify-center">
+                <Image src={"/logo.avif"} width={128} height={64} alt="Everyvent Icon" />
               </div>
-              <span className="text-orange-500 font-semibold text-xl">Everyvent</span>
             </div>
             <p className="text-slate-300 leading-relaxed">
               Connecting communities through amazing events. Discover, create, and join events that matter to you.
@@ -28,7 +27,7 @@ export function Footer() {
               <Link href="/events" className="text-slate-300 hover:text-white transition-colors">
                 Browse Events
               </Link>
-              <Link href="/create" className="text-slate-300 hover:text-white transition-colors">
+              <Link href="/dashboard/events" className="text-slate-300 hover:text-white transition-colors">
                 Create Event
               </Link>
               <Link href="/about" className="text-slate-300 hover:text-white transition-colors">

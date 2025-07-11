@@ -175,9 +175,11 @@ export function EventsGrid() {
 
         {/* Redirect to events page */}
         <div className="flex justify-center mt-8">
-          <Button size={'lg'} className="bg-orange-500 hover:bg-orange-600 text-white cursor-pointer">
-            <Link href="/events">Explore more</Link>
-          </Button>
+          <Link href="/events">
+            <Button size={'lg'} className="bg-orange-500 hover:bg-orange-600 text-white cursor-pointer">
+              Explore more
+            </Button>
+          </Link>
         </div>
 
         {filteredAndSortedEvents.length === 0 && (

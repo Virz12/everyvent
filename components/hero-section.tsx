@@ -21,11 +21,11 @@ export function HeroSection() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-              <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-white px-6 sm:px-8 cursor-pointer">
-                <Link href="/events">
+              <Link href="/events">
+                <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-white px-6 sm:px-8 cursor-pointer">
                   Explore Event
-                </Link>
-              </Button>
+                </Button>
+              </Link>
               <Button
                 size="lg"
                 variant="outline"
