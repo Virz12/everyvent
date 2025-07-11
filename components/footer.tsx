@@ -71,10 +71,6 @@ export function Footer() {
                 <Phone className="h-4 w-4 text-orange-500" />
                 <span className="text-slate-300">+1 (555) 123-4567</span>
               </div>
-              <div className="flex items-center space-x-3">
-                <MapPin className="h-4 w-4 text-orange-500" />
-                <span className="text-slate-300">San Francisco, CA</span>
-              </div>
             </div>
           </div>
         </div>
@@ -82,7 +78,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-slate-800 pt-8">
           <div className="flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0">
-            <div className="text-slate-400 text-sm">© 2024 Everyvent. All rights reserved.</div>
+            <div className="text-slate-400 text-sm">© {new Date().getFullYear()} Everyvent. All rights reserved.</div>
           </div>
         </div>
       </div>

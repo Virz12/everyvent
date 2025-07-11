@@ -3,8 +3,9 @@
 import { Menu, User } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import Image from "next/image"
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden"
 
 export function Header() {
   return (
@@ -41,7 +42,12 @@ export function Header() {
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="bg-slate-900 border-slate-800">
+            <SheetContent side="right" className="bg-slate-900 border-slate-800" aria-describedby={undefined}>
+              <VisuallyHidden>
+                <SheetTitle className="sr-only">
+                  menu
+                </SheetTitle>
+              </VisuallyHidden>
               <nav className="flex flex-col space-y-4 mt-8 px-6 pt-8">
                 <Link href="/events" className="text-slate-300 hover:text-white transition-colors">
                   Events
@@ -54,6 +60,6 @@ export function Header() {
           </Sheet>
         </div>
       </div>
-    </header>
+    </header >
   )
 }
