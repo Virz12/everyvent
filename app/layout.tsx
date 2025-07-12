@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import '@/app/ui/globals.css'
-import { geistSans, geistMono } from '@/app/ui/fonts'
+import { geistSans } from '@/app/ui/fonts'
 import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.className} antialiased`}
       >
         <ThemeProvider
           attribute="class"
