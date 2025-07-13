@@ -100,7 +100,7 @@ export default function DashboardContent() {
       <div className="py-8 px-4 lg:px-6">
         <div className="container mx-auto space-y-8">
           {/* Stats Cards */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             <StatsCard events={events} />
           </div>
 
@@ -204,7 +204,7 @@ export function RecentEvents({ events }: RecentEventsProps) {
             <div key={event.id} className="flex items-center justify-between p-4 bg-slate-700 rounded-lg">
               <div className="flex items-center space-x-4">
                 <img
-                  src={event.image || "/placeholder.svg"}
+                  src={event.image || "/placehold.co/300x200"}
                   alt={event.title}
                   className="w-12 h-12 rounded-lg object-cover"
                 />

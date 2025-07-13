@@ -135,12 +135,12 @@ export function AttendeesPage() {
     <div className="min-h-screen bg-slate-900">
       <div className="bg-slate-800 py-8 px-4 lg:px-6 border-b border-slate-700">
         <div className="container mx-auto">
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+          <div className="flex flex-col md:flex-row justify-between md:items-center lg:items-center gap-4">
             <div>
               <h1 className="text-3xl lg:text-4xl font-bold text-white mb-2">Attendees</h1>
               <p className="text-slate-300">Manage event attendees and registrations</p>
             </div>
-            <Button className="bg-orange-500 hover:bg-orange-600 text-white">
+            <Button className="w-full md:w-auto bg-orange-500 hover:bg-orange-600 text-white cursor-pointer">
               <Download className="h-4 w-4 mr-2" />
               Export Data
             </Button>
@@ -151,8 +151,8 @@ export function AttendeesPage() {
       <div className="py-8 px-4 lg:px-6">
         <div className="container mx-auto space-y-8">
           {/* Stats Cards */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="bg-slate-800 border-slate-700">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            <Card className="bg-slate-800 border-slate-700 pb-0">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
@@ -164,7 +164,7 @@ export function AttendeesPage() {
               </CardContent>
             </Card>
 
-            <Card className="bg-slate-800 border-slate-700">
+            <Card className="bg-slate-800 border-slate-700 pb-0">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
@@ -178,7 +178,7 @@ export function AttendeesPage() {
               </CardContent>
             </Card>
 
-            <Card className="bg-slate-800 border-slate-700">
+            <Card className="bg-slate-800 border-slate-700 pb-0">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
@@ -192,7 +192,7 @@ export function AttendeesPage() {
               </CardContent>
             </Card>
 
-            <Card className="bg-slate-800 border-slate-700">
+            <Card className="bg-slate-800 border-slate-700 pb-0">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
@@ -208,9 +208,9 @@ export function AttendeesPage() {
           </div>
 
           {/* Filters */}
-          <Card className="bg-slate-800 border-slate-700">
+          <Card className="bg-slate-800 border-slate-700 pb-0">
             <CardContent className="p-6">
-              <div className="flex flex-col lg:flex-row gap-4">
+              <div className="flex flex-col md:flex-row gap-4">
                 <div className="flex-1">
                   <div className="relative">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
@@ -267,18 +267,18 @@ export function AttendeesPage() {
           {/* Attendees List */}
           <Card className="bg-slate-800 border-slate-700">
             <CardHeader>
-              <CardTitle className="text-white">
-                Attendees ({filteredAttendees.length})
+              <CardTitle className="text-white space-y-1.5 pt-6">
+                <span className="text-2xl tracking-tight">Attendees ({filteredAttendees.length})</span>
                 {searchQuery && <span className="text-slate-400 font-normal text-base ml-2">for "{searchQuery}"</span>}
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 {filteredAttendees.map((attendee) => (
-                  <div key={attendee.id} className="flex items-center justify-between p-4 bg-slate-700 rounded-lg">
+                  <div key={attendee.id} className="flex items-start sm:items-center justify-between p-4 bg-slate-700 rounded-lg">
                     <div className="flex items-center space-x-4">
                       <Avatar className="h-12 w-12">
-                        <AvatarImage src={attendee.avatar || "/placeholder.svg"} alt={attendee.name} />
+                        <AvatarImage src={attendee.avatar || "/placehold.co/40x40"} alt={attendee.name} />
                         <AvatarFallback className="bg-orange-500 text-white">
                           {attendee.name
                             .split(" ")
@@ -286,9 +286,9 @@ export function AttendeesPage() {
                             .join("")}
                         </AvatarFallback>
                       </Avatar>
-                      <div className="space-y-1">
-                        <h3 className="text-white font-medium">{attendee.name}</h3>
-                        <div className="flex items-center space-x-4 text-sm text-slate-400">
+                      <div>
+                        <h3 className="text-white font-medium mb-1">{attendee.name}</h3>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 space-x-4 text-sm text-slate-400 wrap-break-word">
                           <div className="flex items-center space-x-1">
                             <Mail className="h-3 w-3" />
                             <span>{attendee.email}</span>
@@ -298,7 +298,7 @@ export function AttendeesPage() {
                             <span>{attendee.phone}</span>
                           </div>
                         </div>
-                        <div className="flex items-center space-x-4 text-sm text-slate-400">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 space-x-4 text-sm text-slate-400 wrap-break-word">
                           <div className="flex items-center space-x-1">
                             <Calendar className="h-3 w-3" />
                             <span>{attendee.eventTitle}</span>
@@ -310,7 +310,7 @@ export function AttendeesPage() {
                         </div>
                       </div>
                     </div>
-                    <div className="flex items-center space-x-3">
+                    <div className="flex items-center space-x-3 mt-0.5">
                       <Badge className={`${getStatusColor(attendee.status)} text-white`}>{attendee.status}</Badge>
                     </div>
                   </div>
