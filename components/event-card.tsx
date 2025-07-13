@@ -2,6 +2,7 @@ import { Calendar, MapPin, Users } from "lucide-react"
 import { Badge } from "./ui/badge"
 import { Card, CardContent } from "./ui/card"
 import { Button } from "./ui/button"
+import Link from "next/link"
 
 interface EventCardProps {
   event: {
@@ -89,9 +90,11 @@ export default function EventCard({ event }: EventCardProps) {
 
           <div className="flex items-center justify-between pt-4">
             <span className="text-white font-semibold text-lg">Free</span>
-            <Button size="sm" className="bg-orange-500 hover:bg-orange-600 text-white cursor-pointer">
-              Join Event
-            </Button>
+            <Link href={`/events/${event.id}`}>
+              <Button size="sm" className="bg-orange-500 hover:bg-orange-600 text-white cursor-pointer">
+                View Details
+              </Button>
+            </Link>
           </div>
         </div>
       </CardContent>
