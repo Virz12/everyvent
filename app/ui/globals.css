@@ -120,6 +120,10 @@
     @apply bg-slate-900 text-foreground;
   }
 
+  ::selection {
+    @apply bg-orange-500 text-white;
+  }
+
   /* Scrollbar bug fix when open select and modal */
   html body[data-scroll-locked] {
     overflow: visible !important;
