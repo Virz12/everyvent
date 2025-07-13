@@ -455,13 +455,14 @@ export default function EventsListPage() {
             </p>
           </div>
 
+          {/* Event Cards */}
           <div className="mb-12 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {paginatedEvents.map((event) => (
               <EventCard key={event.id} event={event} />
             ))}
           </div>
 
-          {/* Keep existing pagination */}
+          {/* Pagination */}
           {totalPages > 1 && (
             <Pagination currentPage={currentPage} totalPages={totalPages} setCurrentPage={setCurrentPage} />
           )}

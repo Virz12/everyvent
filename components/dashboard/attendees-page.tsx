@@ -152,7 +152,7 @@ export function AttendeesPage() {
         <div className="container mx-auto space-y-8">
           {/* Stats Cards */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="bg-slate-800 border-slate-700 pb-0">
+            <Card className="bg-slate-800 border-slate-700">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
@@ -164,7 +164,7 @@ export function AttendeesPage() {
               </CardContent>
             </Card>
 
-            <Card className="bg-slate-800 border-slate-700 pb-0">
+            <Card className="bg-slate-800 border-slate-700">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
@@ -178,7 +178,7 @@ export function AttendeesPage() {
               </CardContent>
             </Card>
 
-            <Card className="bg-slate-800 border-slate-700 pb-0">
+            <Card className="bg-slate-800 border-slate-700">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
@@ -192,7 +192,7 @@ export function AttendeesPage() {
               </CardContent>
             </Card>
 
-            <Card className="bg-slate-800 border-slate-700 pb-0">
+            <Card className="bg-slate-800 border-slate-700">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
@@ -208,7 +208,7 @@ export function AttendeesPage() {
           </div>
 
           {/* Filters */}
-          <Card className="bg-slate-800 border-slate-700 pb-0">
+          <Card className="bg-slate-800 border-slate-700">
             <CardContent className="p-6">
               <div className="flex flex-col md:flex-row gap-4">
                 <div className="flex-1">
@@ -265,7 +265,7 @@ export function AttendeesPage() {
           </Card>
 
           {/* Attendees List */}
-          <Card className="bg-slate-800 border-slate-700">
+          <Card className="bg-slate-800 border-slate-700 pb-6">
             <CardHeader>
               <CardTitle className="text-white space-y-1.5 pt-6">
                 <span className="text-2xl tracking-tight">Attendees ({filteredAttendees.length})</span>

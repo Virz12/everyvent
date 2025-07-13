@@ -118,7 +118,7 @@ export function StatsCard({ events }: StatsCardProps) {
   const draftEvents = events.filter((event) => event.status === "draft").length
 
   return <>
-    <Card className="bg-slate-800 border-slate-700 pb-0">
+    <Card className="bg-slate-800 border-slate-700">
       <CardContent className="p-6">
         <div className="flex items-center justify-between">
           <div>
@@ -130,7 +130,7 @@ export function StatsCard({ events }: StatsCardProps) {
       </CardContent>
     </Card>
 
-    <Card className="bg-slate-800 border-slate-700 pb-0">
+    <Card className="bg-slate-800 border-slate-700">
       <CardContent className="p-6">
         <div className="flex items-center justify-between">
           <div>
@@ -142,7 +142,7 @@ export function StatsCard({ events }: StatsCardProps) {
       </CardContent>
     </Card>
 
-    <Card className="bg-slate-800 border-slate-700 pb-0">
+    <Card className="bg-slate-800 border-slate-700">
       <CardContent className="p-6">
         <div className="flex items-center justify-between">
           <div>
@@ -154,7 +154,7 @@ export function StatsCard({ events }: StatsCardProps) {
       </CardContent>
     </Card>
 
-    <Card className="bg-slate-800 border-slate-700 pb-0">
+    <Card className="bg-slate-800 border-slate-700">
       <CardContent className="p-6">
         <div className="flex items-center justify-between">
           <div>
@@ -192,7 +192,7 @@ export function RecentEvents({ events }: RecentEventsProps) {
   }
 
   return (
-    <Card className="bg-slate-800 border-slate-700">
+    <Card className="bg-slate-800 border-slate-700 pb-6">
       <CardHeader>
         <CardTitle className="space-y-1.5 pt-6">
           <h3 className="text-2xl tracking-tight text-white">Recent Events</h3>

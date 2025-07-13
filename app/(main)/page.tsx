@@ -1,5 +1,3 @@
-'use client'
-
 import { HeroSection } from "@/components/hero-section"
 import { EventsGrid } from "@/components/events-grid"
 import { FeaturedIn } from "@/components/featured-in"

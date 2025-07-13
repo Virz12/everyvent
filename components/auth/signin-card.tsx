@@ -22,7 +22,7 @@ export default function SignInCard() {
   }
 
   return (
-    <Card className="bg-slate-800 border-slate-700">
+    <Card className="bg-slate-800 border-slate-700 pb-6">
       <CardHeader className="space-y-4 pb-6 mt-6">
         <div className="text-center space-y-2">
           <div className="flex justify-center">
