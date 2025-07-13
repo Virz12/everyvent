@@ -101,8 +101,8 @@ export default function EditEventForm({ onSubmit, onClose, event }: EditEventFor
   }
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="grid md:grid-cols-2 gap-6">
-        <div className="space-y-2">
+      <div className="grid grid-cols-6 gap-6">
+        <div className="space-y-2 col-span-3">
           <Label htmlFor="title" className="text-slate-300">
             Event Title *
           </Label>
@@ -116,7 +116,7 @@ export default function EditEventForm({ onSubmit, onClose, event }: EditEventFor
           {errors.title && <p className="text-red-400 text-sm">{errors.title}</p>}
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-2 col-span-3">
           <Label htmlFor="category" className="text-slate-300">
             Category *
           </Label>
@@ -136,25 +136,23 @@ export default function EditEventForm({ onSubmit, onClose, event }: EditEventFor
           </Select>
           {errors.category && <p className="text-red-400 text-sm">{errors.category}</p>}
         </div>
-      </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="description" className="text-slate-300">
-          Description *
-        </Label>
-        <Textarea
-          id="description"
-          value={formData.description}
-          onChange={(e) => handleInputChange("description", e.target.value)}
-          placeholder="Describe your event..."
-          rows={4}
-          className={`bg-slate-700 border-slate-600 text-white ${errors.description ? "border-red-500" : ""}`}
-        />
-        {errors.description && <p className="text-red-400 text-sm">{errors.description}</p>}
-      </div>
+        <div className="space-y-2 col-span-6">
+          <Label htmlFor="description" className="text-slate-300">
+            Description *
+          </Label>
+          <Textarea
+            id="description"
+            value={formData.description}
+            onChange={(e) => handleInputChange("description", e.target.value)}
+            placeholder="Describe your event..."
+            rows={4}
+            className={`bg-slate-700 border-slate-600 text-white ${errors.description ? "border-red-500" : ""}`}
+          />
+          {errors.description && <p className="text-red-400 text-sm">{errors.description}</p>}
+        </div>
 
-      <div className="grid md:grid-cols-3 gap-4">
-        <div className="space-y-2">
+        <div className="space-y-2 col-span-3 md:col-span-2">
           <Label htmlFor="date" className="text-slate-300 flex items-center">
             <Calendar className="h-4 w-4 mr-1" />
             Date *
@@ -169,7 +167,7 @@ export default function EditEventForm({ onSubmit, onClose, event }: EditEventFor
           {errors.date && <p className="text-red-400 text-sm">{errors.date}</p>}
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-2 col-span-3 md:col-span-2">
           <Label htmlFor="time" className="text-slate-300 flex items-center">
             <Clock className="h-4 w-4 mr-1" />
             Time *
@@ -184,7 +182,7 @@ export default function EditEventForm({ onSubmit, onClose, event }: EditEventFor
           {errors.time && <p className="text-red-400 text-sm">{errors.time}</p>}
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-2 col-span-3 md:col-span-2">
           <Label htmlFor="duration" className="text-slate-300">
             Duration *
           </Label>
@@ -197,10 +195,8 @@ export default function EditEventForm({ onSubmit, onClose, event }: EditEventFor
           />
           {errors.duration && <p className="text-red-400 text-sm">{errors.duration}</p>}
         </div>
-      </div>
 
-      <div className="grid md:grid-cols-2 gap-4">
-        <div className="space-y-2">
+        <div className="space-y-2 col-span-3">
           <Label htmlFor="location" className="text-slate-300 flex items-center">
             <MapPin className="h-4 w-4 mr-1" />
             Location *
@@ -215,7 +211,7 @@ export default function EditEventForm({ onSubmit, onClose, event }: EditEventFor
           {errors.location && <p className="text-red-400 text-sm">{errors.location}</p>}
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-2 col-span-3">
           <Label htmlFor="maxAttendees" className="text-slate-300 flex items-center">
             <Users className="h-4 w-4 mr-1" />
             Max Attendees *
@@ -231,39 +227,41 @@ export default function EditEventForm({ onSubmit, onClose, event }: EditEventFor
           />
           {errors.maxAttendees && <p className="text-red-400 text-sm">{errors.maxAttendees}</p>}
         </div>
-      </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="status" className="text-slate-300">
-          Status
-        </Label>
-        <Select value={formData.status} onValueChange={(value) => handleInputChange("status", value)}>
-          <SelectTrigger className="bg-slate-700 border-slate-600 text-white">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent className="bg-slate-700 border-slate-600">
-            <SelectItem value="draft" className="text-white hover:bg-slate-600">
-              Draft
-            </SelectItem>
-            <SelectItem value="published" className="text-white hover:bg-slate-600">
-              Published
-            </SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
+        <div className="space-y-2 col-span-3">
+          <Label htmlFor="status" className="text-slate-300">
+            Status
+          </Label>
+          <Select value={formData.status} onValueChange={(value) => handleInputChange("status", value)}>
+            <SelectTrigger className="bg-slate-700 border-slate-600 text-white">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent className="bg-slate-700 border-slate-600">
+              <SelectItem value="draft" className="text-white hover:bg-slate-600">
+                Draft
+              </SelectItem>
+              <SelectItem value="published" className="text-white hover:bg-slate-600">
+                Published
+              </SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
 
-      <div className="flex justify-end space-x-4 pt-6">
-        <Button
-          type="button"
-          variant="outline"
-          onClick={onClose}
-          className="border-slate-600 text-slate-300 hover:bg-slate-700 bg-transparent"
-        >
-          Cancel
-        </Button>
-        <Button type="submit" className="bg-orange-500 hover:bg-orange-600 text-white">
-          Update Event
-        </Button>
+        <div className="space-y-2 col-span-6">
+          <div className="flex justify-end space-x-4 pt-6">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={onClose}
+              className="border-slate-600 text-slate-300 hover:bg-slate-700 bg-transparent"
+            >
+              Cancel
+            </Button>
+            <Button type="submit" className="bg-orange-500 hover:bg-orange-600 text-white">
+              Update Event
+            </Button>
+          </div>
+        </div>
       </div>
     </form>
   )
