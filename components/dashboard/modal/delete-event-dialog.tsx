@@ -30,8 +30,8 @@ export function DeleteEventDialog({ isOpen, onClose, onConfirm, eventTitle }: De
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel className="border-slate-600 text-slate-300 hover:bg-slate-700">Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={onConfirm} className="bg-red-600 hover:bg-red-700 text-white">
+          <AlertDialogCancel className="border-slate-600 text-slate-300 hover:bg-slate-700 cursor-pointer">Cancel</AlertDialogCancel>
+          <AlertDialogAction onClick={onConfirm} className="bg-red-600 hover:bg-red-700 text-white cursor-pointer">
             Delete Event
           </AlertDialogAction>
         </AlertDialogFooter>
