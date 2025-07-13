@@ -26,15 +26,15 @@ export function HeroSection() {
                   Explore Event
                 </Button>
               </Link>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-slate-600 text-slate-300 hover:bg-slate-800 bg-transparent cursor-pointer"
-              >
-                <Link href="/dashboard/events">
+              <Link href="/dashboard/events">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-slate-600 text-slate-300 hover:bg-slate-80 px-6 sm:px-8 bg-transparent cursor-pointer"
+                >
                   Create Event
-                </Link>
-              </Button>
+                </Button>
+              </Link>
             </div>
           </div>
 
@@ -69,6 +69,6 @@ export function HeroSection() {
           </div>
         </div>
       </div>
-    </section>
+    </section >
   )
 }
