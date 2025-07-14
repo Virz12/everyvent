@@ -3,11 +3,11 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Plus, Calendar } from "lucide-react"
-import { CreateEventModal } from "@/components/dashboard/modal/create-event-modal"
-import { EditEventModal } from "@/components/dashboard/modal/edit-event-modal"
-import { DeleteEventDialog } from "@/components/dashboard/modal/delete-event-dialog"
-import EventCard from "@/components/dashboard/event-card"
-import { EventTypeForm } from "@/components/dashboard/form/create-event-form"
+import { CreateEventModal } from "@/components/dashboard/organizer/modal/create-event-modal"
+import { EditEventModal } from "@/components/dashboard/organizer/modal/edit-event-modal"
+import { DeleteEventDialog } from "@/components/dashboard/organizer/modal/delete-event-dialog"
+import EventCard from "@/components/dashboard/organizer/event-card"
+import { EventTypeForm } from "@/components/dashboard/organizer/form/create-event-form"
 
 interface EventType {
   id: number

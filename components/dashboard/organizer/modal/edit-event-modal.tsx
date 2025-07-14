@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import CreateEventForm from "@/components/dashboard/form/create-event-form";
+import EditEventForm from "@/components/dashboard/organizer/form/edit-event-form"
 
 interface EventTypeForm {
   title: string
@@ -17,22 +17,22 @@ interface EventTypeForm {
   description: string
 }
 
-interface CreateEventModalProps {
+interface EditEventModalProps {
   isOpen: boolean
   onClose: () => void
   onSubmit: (eventData: EventTypeForm) => void
+  event: EventTypeForm
 }
 
-export function CreateEventModal({ isOpen, onClose, onSubmit }: CreateEventModalProps) {
+export function EditEventModal({ isOpen, onClose, onSubmit, event }: EditEventModalProps) {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="bg-slate-800 border-slate-700 text-white max-w-2xl max-h-[90vh] overflow-y-auto" aria-describedby="modal-event-create-form">
+      <DialogContent className="bg-slate-800 border-slate-700 text-white max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold">Create New Event</DialogTitle>
+          <DialogTitle className="text-2xl font-bold">Edit Event</DialogTitle>
         </DialogHeader>
-        <CreateEventForm onSubmit={onSubmit} onClose={onClose} />
+        <EditEventForm onSubmit={onSubmit} onClose={onClose} event={event} />
       </DialogContent>
     </Dialog>
   )
 }
-

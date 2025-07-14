@@ -27,7 +27,7 @@ export function Footer() {
               <Link href="/events" className="text-slate-300 hover:text-white transition-colors">
                 Browse Events
               </Link>
-              <Link href="/dashboard/events" className="text-slate-300 hover:text-white transition-colors">
+              <Link href="/dashboard/organizer/events" className="text-slate-300 hover:text-white transition-colors">
                 Create Event
               </Link>
               <Link href="/about" className="text-slate-300 hover:text-white transition-colors">

@@ -1,7 +1,7 @@
 import { Calendar, Edit, Trash2, Users } from "lucide-react"
-import { Badge } from "../ui/badge"
-import { Card, CardContent } from "../ui/card"
-import { Button } from "../ui/button"
+import { Badge } from "../../ui/badge"
+import { Card, CardContent } from "../../ui/card"
+import { Button } from "../../ui/button"
 
 interface EventCardType {
   event: {

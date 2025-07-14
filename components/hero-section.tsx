@@ -26,7 +26,7 @@ export function HeroSection() {
                   Explore Event
                 </Button>
               </Link>
-              <Link href="/dashboard/events">
+              <Link href="/dashboard/organizer/events">
                 <Button
                   size="lg"
                   variant="outline"
