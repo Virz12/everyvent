@@ -1,4 +1,4 @@
-import { Calendar, LayoutDashboard, LogOut, Users, X } from "lucide-react"
+import { Calendar, LayoutDashboard, LogOut, User2, Users, X } from "lucide-react"
 import { Button } from "../ui/button"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -10,14 +10,21 @@ interface sidebarProps {
 }
 
 // navigation List
-const navigation = [
-  { name: "Overview", href: "/dashboard", icon: LayoutDashboard },
-  { name: "My Events", href: "/dashboard/events", icon: Calendar },
-  { name: "Attendees", href: "/dashboard/attendees", icon: Users },
+const navigationOrganizer = [
+  { name: "Overview", href: "/dashboard/organizer", icon: LayoutDashboard },
+  { name: "My Events", href: "/dashboard/organizer/events", icon: Calendar },
+  { name: "Attendees", href: "/dashboard/organizer/attendees", icon: Users },
+  { name: "My Account", href: "/dashboard/organizer/account", icon: User2 }
+]
+
+const navigationParticipant = [
+  { name: "Overview", href: "/dashboard/participant", icon: LayoutDashboard },
+  { name: "My Account", href: "/dashboard/participant/account", icon: User2 }
 ]
 
 export default function Sidebar({ isSidebarOpen, setSidebarOpen }: sidebarProps) {
   const pathname = usePathname()
+  const isOrganizer = pathname.split('/')[2] === 'organizer'
 
   return <>
     {/* Mobile sidebar overlay */}
@@ -62,23 +69,42 @@ export default function Sidebar({ isSidebarOpen, setSidebarOpen }: sidebarProps)
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
-          {navigation.map((item) => {
-            const isActive = pathname === item.href
-            return (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`
+        <nav className="flex-1 px-4 py-6 space-y-4 overflow-y-auto">
+          {isOrganizer && (
+            navigationOrganizer.map((item) => {
+              const isActive = pathname === item.href
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`
                     flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors
                     ${isActive ? "bg-orange-500 text-white" : "text-slate-300 hover:text-white hover:bg-slate-700"}
                   `}
-              >
-                <item.icon className="h-5 w-5" />
-                <span>{item.name}</span>
-              </Link>
-            )
-          })}
+                >
+                  <item.icon className="h-5 w-5" />
+                  <span>{item.name}</span>
+                </Link>
+              )
+            })
+          ) || (
+              navigationParticipant.map((item) => {
+                const isActive = pathname === item.href
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={`
+                    flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors
+                    ${isActive ? "bg-orange-500 text-white" : "text-slate-300 hover:text-white hover:bg-slate-700"}
+                  `}
+                  >
+                    <item.icon className="h-5 w-5" />
+                    <span>{item.name}</span>
+                  </Link>
+                )
+              })
+            )}
         </nav>
 
         {/* Sign Out */}

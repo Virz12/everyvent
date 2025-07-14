@@ -1,7 +1,7 @@
 'use client'
 
 import AccountForm from "@/components/dashboard/organizer/form/account-form";
-import DeleteAccountDialog from "@/components/dashboard/organizer/modal/delete-account-dialog";
+import DeleteAccountDialog from "@/components/dashboard/delete-account-dialog";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useState } from "react";
