@@ -63,7 +63,7 @@ export default function EventCard({ event }: EventCardProps) {
                 </Badge>
                 <span className="text-slate-400 text-xs">{getDaysUntilEvent(event.date)}</span>
               </div>
-              <div className="">
+              <div>
                 <h3 className="text-white font-semibold text-lg leading-tight">{event.title}</h3>
                 <span className="text-slate-400 text-sm">By {event.organizer}</span>
               </div>

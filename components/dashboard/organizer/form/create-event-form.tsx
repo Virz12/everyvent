@@ -158,7 +158,7 @@ export default function CreateEventForm({ onSubmit, onClose }: CreateEventFormPr
             type="date"
             value={formData.date}
             onChange={(e) => handleInputChange("date", e.target.value)}
-            className={`bg-slate-700 border-slate-600 text-white ${errors.date ? "border-red-500" : ""}`}
+            className={`bg-slate-700 border-slate-600 text-white block ${errors.date ? "border-red-500" : ""}`}
           />
           {errors.date && <p className="text-red-400 text-sm">{errors.date}</p>}
         </div>
@@ -173,7 +173,7 @@ export default function CreateEventForm({ onSubmit, onClose }: CreateEventFormPr
             type="time"
             value={formData.time}
             onChange={(e) => handleInputChange("time", e.target.value)}
-            className={`bg-slate-700 border-slate-600 text-white ${errors.time ? "border-red-500" : ""}`}
+            className={`bg-slate-700 border-slate-600 text-white block ${errors.time ? "border-red-500" : ""}`}
           />
           {errors.time && <p className="text-red-400 text-sm">{errors.time}</p>}
         </div>

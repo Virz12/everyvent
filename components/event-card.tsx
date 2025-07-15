@@ -14,6 +14,7 @@ interface EventCardProps {
     duration: string
     location: string
     attendees: number
+    organizer: string
     maxAttendees: number
     image: string
     description: string
@@ -65,7 +66,10 @@ export default function EventCard({ event }: EventCardProps) {
                 </Badge>
                 <span className="text-slate-400 text-xs">{getDaysUntilEvent(event.date)}</span>
               </div>
-              <h3 className="text-white font-semibold text-lg leading-tight">{event.title}</h3>
+              <div>
+                <h3 className="text-white font-semibold text-lg leading-tight">{event.title}</h3>
+                <span className="text-slate-400 text-sm">by {event.organizer}</span>
+              </div>
             </div>
           </div>
 

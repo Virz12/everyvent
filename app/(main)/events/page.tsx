@@ -495,7 +495,7 @@ export function SearchBar({ searchQuery, setSearchQuery }: SearchBarProps) {
       <div className="relative max-w-2xl">
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
         <Input
-          placeholder="Search events, organizers, or descriptions..."
+          placeholder="Search events, organizers, or categories..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="pl-10 bg-slate-800 border-slate-700 text-white placeholder:text-slate-400 h-12"
@@ -512,7 +512,7 @@ export function Pagination({ currentPage, totalPages, setCurrentPage }: Paginati
         variant="outline"
         onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
         disabled={currentPage === 1}
-        className="border-slate-600 text-slate-300 hover:bg-slate-800 bg-transparent"
+        className="border-slate-600 text-slate-300 hover:bg-slate-800 bg-transparent cursor-pointer"
       >
         Previous
       </Button>
@@ -529,7 +529,7 @@ export function Pagination({ currentPage, totalPages, setCurrentPage }: Paginati
                 className={
                   page === currentPage
                     ? "bg-orange-500 hover:bg-orange-600 text-white"
-                    : "border-slate-600 text-slate-300 hover:bg-slate-800 bg-transparent"
+                    : "border-slate-600 text-slate-300 hover:bg-slate-800 bg-transparent cursor-pointer"
                 }
               >
                 {page}
@@ -550,7 +550,7 @@ export function Pagination({ currentPage, totalPages, setCurrentPage }: Paginati
         variant="outline"
         onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
         disabled={currentPage === totalPages}
-        className="border-slate-600 text-slate-300 hover:bg-slate-800 bg-transparent"
+        className="border-slate-600 text-slate-300 hover:bg-slate-800 bg-transparent cursor-pointer"
       >
         Next
       </Button>

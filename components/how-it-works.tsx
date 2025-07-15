@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { Calendar, Heart, MapPin, Users } from "lucide-react"
+import Link from "next/link"
 
 export function HowItWorks() {
   const steps = [
@@ -52,8 +53,11 @@ export function HowItWorks() {
                 </div>
               ))}
             </div>
-
-            <Button className="bg-orange-500 hover:bg-orange-600 text-white cursor-pointer">Get Started</Button>
+            <Link href="/signin">
+              <Button className="bg-orange-500 hover:bg-orange-600 text-white cursor-pointer">
+                Get Started
+              </Button>
+            </Link>
           </div>
 
           <div className="relative">
