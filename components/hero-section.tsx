@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { Calendar, MapPin, Users } from "lucide-react"
+import { Users } from "lucide-react"
 import Link from "next/link"
 
 export function HeroSection() {

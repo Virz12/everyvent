@@ -95,7 +95,6 @@ interface EventDetailPageProps {
 export default function EventDetailPage(props: EventDetailPageProps) {
   const params = use(props.params);
   const [isRegistered, setIsRegistered] = useState(false)
-  const [isFavorited, setIsFavorited] = useState(false)
 
   // Find the event by ID
   const { id } = params
@@ -142,10 +141,6 @@ export default function EventDetailPage(props: EventDetailPageProps) {
 
   const handleRegister = () => {
     setIsRegistered(!isRegistered)
-  }
-
-  const handleFavorite = () => {
-    setIsFavorited(!isFavorited)
   }
 
   // const handleShare = () => {

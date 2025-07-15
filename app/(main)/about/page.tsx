@@ -1,7 +1,8 @@
-import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Users, Calendar, MapPin, Star, Heart, Zap } from "lucide-react"
 import Link from "next/link"
+import { Features } from "./features"
+import { Team } from "./team"
+import Stats from "./stats"
 
 export default function AboutPage() {
   return (
@@ -113,128 +114,5 @@ export default function AboutPage() {
         </div>
       </section>
     </div>
-  )
-}
-
-export function Stats() {
-  const stats = [
-    { number: "1K+", label: "Events Hosted" },
-    { number: "24K+", label: "Happy Attendees" },
-    { number: "120+", label: "Event Organizers" },
-    { number: "20+", label: "Cities Worldwide" },
-  ]
-
-  return (
-    <section className="bg-slate-800 py-16 px-4 lg:px-6">
-      <div className="container mx-auto">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {stats.map((stat, index) => (
-            <div key={index} className="text-center">
-              <div className="text-3xl lg:text-4xl font-bold text-orange-500 mb-2">{stat.number}</div>
-              <div className="text-slate-300 text-lg">{stat.label}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-export function Features() {
-  const features = [
-    {
-      icon: Calendar,
-      title: "Easy Event Creation",
-      description:
-        "Create and manage events with our intuitive interface. Set up everything from workshops to conferences in minutes.",
-    },
-    {
-      icon: Users,
-      title: "Community Building",
-      description:
-        "Connect like-minded people and build lasting relationships through shared interests and experiences.",
-    },
-    {
-      icon: MapPin,
-      title: "Location Flexibility",
-      description: "Host events anywhere - from local meetups to virtual conferences. We support all types of venues.",
-    },
-    {
-      icon: Star,
-      title: "Quality Events",
-      description: "Our curated selection ensures high-quality events that provide real value to attendees.",
-    },
-    {
-      icon: Heart,
-      title: "Passion-Driven",
-      description: "We're passionate about bringing people together and creating meaningful connections.",
-    },
-    {
-      icon: Zap,
-      title: "Powerful Tools",
-      description:
-        "Advanced features for organizers including attendee management, drafting events, and export reports.",
-    },
-  ]
-
-  return (
-    <section className="bg-slate-800 py-20 px-4 lg:px-6">
-      <div className="container mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">Why Choose Everyvent?</h2>
-          <p className="text-slate-300 text-lg max-w-2xl mx-auto">
-            We've built Everyvent with both organizers and attendees in mind, creating a platform that makes events
-            better for everyone.
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
-            <Card key={index} className="bg-slate-700 border-slate-600">
-              <CardContent className="p-6">
-                <div className="flex items-center space-x-4 mb-4">
-                  <div className="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center">
-                    <feature.icon className="h-6 w-6 text-white" />
-                  </div>
-                  <h3 className="text-white font-semibold text-lg">{feature.title}</h3>
-                </div>
-                <p className="text-slate-300 leading-relaxed">{feature.description}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-export function Team() {
-  return (
-    <section className="bg-slate-900 py-20 px-4 lg:px-6">
-      <div className="container mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">Meet The Founder</h2>
-          <p className="text-slate-300 text-lg max-w-2xl mx-auto">
-            I'am a passionate team of event enthusiasts, technologists, and community builders working to make events
-            better for everyone.
-          </p>
-        </div>
-
-        <div className="flex justify-center gap-8">
-          <Card className="bg-slate-800 border-slate-700 text-center">
-            <CardContent className="p-6">
-              <img
-                src="https://placehold.co/200x200"
-                alt="Virgi Riyadi"
-                className="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
-              />
-              <h3 className="text-white font-semibold text-lg mb-1">Virgi Riyadi</h3>
-              <p className="text-orange-500 font-medium mb-3">Founder</p>
-              <p className="text-slate-300 text-sm leading-relaxed">Former Everyvent with 1 year experience in web developing</p>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-    </section>
   )
 }
