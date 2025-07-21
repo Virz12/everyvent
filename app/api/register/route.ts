@@ -1,0 +1,58 @@
+"use server";
+
+import { prisma } from "@/lib/prisma";
+import { Role } from "@prisma/client";
+import { hash } from "bcryptjs";
+import { NextResponse } from "next/server";
+import * as z from "zod";
+
+// Zod Schema
+const registerSchema = z.object({
+  name: z.string(),
+  email: z.email(),
+  password: z.string().min(8),
+  role: z.enum(["PARTICIPANT", "ORGANIZER"]),
+});
+
+export async function POST(req: Request) {
+  try {
+    const { name, email, password, role } = await req.json();
+
+    registerSchema.parse({
+      name,
+      email,
+      password,
+      role,
+    });
+
+    const existingUser = await prisma.user.findUnique({ where: { email } });
+
+    if (existingUser) {
+      return NextResponse.json(
+        { error: "User already exists" },
+        { status: 400 }
+      );
+    }
+
+    const hashedPassword = await hash(password, 10);
+
+    const user = await prisma.user.create({
+      data: {
+        name,
+        email,
+        password: hashedPassword,
+        role: role as Role,
+      },
+    });
+
+    console.log(user);
+
+    return NextResponse.json({ success: true }, { status: 201 });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
+  }
+}

@@ -6,6 +6,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Menu } from "lucide-react"
 import Sidebar from "@/components/dashboard/sidebar"
+import { SessionProvider } from "next-auth/react"
 
 interface DashboardLayoutProps {
   children: React.ReactNode
@@ -37,7 +38,11 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         </div>
 
         {/* Page content */}
-        <main className="flex-1 lg:ml-[255px]">{children}</main>
+        <main className="flex-1 lg:ml-[255px]">
+          <SessionProvider>
+            {children}
+          </SessionProvider>
+        </main>
       </div>
     </div>
   )

@@ -7,6 +7,7 @@ import { Separator } from "@/components/ui/separator"
 import Image from "next/image"
 import { GoogleSignButton } from "@/components/auth/google-sign-button"
 import SignInForm from "@/components/auth/signin-form"
+import { login } from "@/lib/actions/auth"
 
 export default function SignInCard() {
   const [isLoading, setIsLoading] = useState(false)
@@ -14,8 +15,7 @@ export default function SignInCard() {
   const handleGoogleSignIn = async () => {
     setIsLoading(true)
 
-    // Simulate Google OAuth
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    login();
 
     console.log("Google sign in")
     setIsLoading(false)
