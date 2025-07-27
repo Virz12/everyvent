@@ -140,7 +140,7 @@ export const changePassword = async (formData: FormData) => {
   } catch (error) {
     return {
       success: false,
-      errors: "Internal server error",
+      errors: "Internal server error: " + error,
       status: 500,
     };
   }
