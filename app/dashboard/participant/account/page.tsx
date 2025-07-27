@@ -4,15 +4,11 @@ import DeleteAccountDialog from "@/components/dashboard/delete-account-dialog";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useState } from "react";
-import { useSession } from "next-auth/react";
 import UpdateAccountForm from "@/components/dashboard/participant/form/update-account-form";
 import ChangePasswordForm from "@/components/dashboard/participant/form/change-password-form";
 
 export default function AccountPage() {
   const [isOpen, setIsOpen] = useState(false)
-
-  const { data: session } = useSession()
-  const currentUser = session?.user
 
   return (
     <div className="min-h-screen bg-slate-900">
