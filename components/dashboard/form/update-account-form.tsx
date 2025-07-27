@@ -3,15 +3,29 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { updateAccount } from "@/lib/actions/account";
+import { Textarea } from "@/components/ui/textarea";
+import { getAccount, updateAccount } from "@/lib/actions/account";
 import { useSession } from "next-auth/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function UpdateAccountForm() {
   const [isLoading, setIsLoading] = useState(false)
+  const [description, setDescription] = useState('')
 
   const { data: session, update } = useSession()
   const currentUser = session?.user
+
+  useEffect(() => {
+    getAccountDesc()
+  }, [])
+
+  const getAccountDesc = async () => {
+    const { data } = await getAccount()
+
+    if (data) {
+      setDescription(data.description as string)
+    }
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -36,6 +50,7 @@ export default function UpdateAccountForm() {
   return (
     <form onSubmit={handleSubmit}>
       <div className="flex flex-col gap-4">
+        {/* Account Name */}
         <div className="flex flex-col md:flex-row justify-between shrink space-y-4 md:space-y-0 space-x-4">
           <Label htmlFor="name" className="items-start text-slate-300">Account Name</Label>
           <div className="w-auto md:w-1/2">
@@ -47,6 +62,23 @@ export default function UpdateAccountForm() {
               autoComplete="off" />
           </div>
         </div>
+        {/* Description */}
+        {currentUser?.role === 'ORGANIZER' && (
+          <div className="flex flex-col md:flex-row justify-between shrink space-y-4 md:space-y-0 space-x-4">
+            <Label htmlFor="description" className="items-start text-slate-300">Account Description</Label>
+            <div className="w-auto md:w-1/2">
+              <Textarea
+                name="description"
+                id="description"
+                defaultValue={description}
+                placeholder="Account Description"
+                className="resize-none"
+              >
+              </Textarea>
+            </div>
+          </div>
+        )}
+        {/* Email */}
         <div className="flex flex-col md:flex-row justify-between shrink space-y-4 md:space-y-0 space-x-4">
           <Label htmlFor="email" className="items-start text-slate-300">Email</Label>
           <div className="w-auto md:w-1/2">
@@ -69,6 +101,7 @@ export default function UpdateAccountForm() {
               placeholder="+1 (123) 456-7890" />
           </div>
         </div> */}
+        {/* Profile Picture */}
         <div className="flex flex-col md:flex-row justify-between shrink space-y-4 md:space-y-0 space-x-4">
           <Label htmlFor="avatar" className="items-start text-slate-300">Profile Picture</Label>
           <div className="w-auto md:w-1/2">
@@ -78,6 +111,7 @@ export default function UpdateAccountForm() {
               className="text-xs" />
           </div>
         </div>
+        {/* Button */}
         <div>
           <Button
             type="submit"

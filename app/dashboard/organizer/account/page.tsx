@@ -4,8 +4,8 @@ import DeleteAccountDialog from "@/components/dashboard/delete-account-dialog";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useState } from "react";
-import UpdateAccountForm from "@/components/dashboard/participant/form/update-account-form";
-import ChangePasswordForm from "@/components/dashboard/participant/form/change-password-form";
+import UpdateAccountForm from "@/components/dashboard/form/update-account-form";
+import ChangePasswordForm from "@/components/dashboard/form/change-password-form";
 
 export default function AccountPage() {
   const [isOpen, setIsOpen] = useState(false)

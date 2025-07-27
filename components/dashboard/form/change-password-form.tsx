@@ -28,9 +28,15 @@ export default function ChangePasswordForm() {
 
     const res = await changePassword(formData)
 
-    if (res.success) {
-      alert("Password updated!");
+    if (!res?.success) {
+      console.log(res.errors)
+      setIsLoading(false)
+      return
     }
+
+    alert("Password updated!");
+    setIsLoading(false)
+    window.location.reload();
   }
 
   return (

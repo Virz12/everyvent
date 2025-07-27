@@ -39,7 +39,6 @@ export default function SignInForm({
     const res = await signIn("credentials", {
       email: formData.email,
       password: formData.password,
-      // redirectTo: "/dashboard/organizer"
       redirect: false
     })
 
