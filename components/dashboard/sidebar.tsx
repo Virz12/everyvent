@@ -3,6 +3,8 @@ import { Button } from "../ui/button"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import Image from "next/image"
+import { useSession } from "next-auth/react"
+import { logout } from "@/lib/actions/auth"
 
 interface sidebarProps {
   isSidebarOpen: boolean
@@ -25,6 +27,16 @@ const navigationParticipant = [
 export default function Sidebar({ isSidebarOpen, setSidebarOpen }: sidebarProps) {
   const pathname = usePathname()
   const isOrganizer = pathname.split('/')[2] === 'organizer'
+
+  const { data: session } = useSession()
+
+  const currentUser = session?.user
+
+  const avatarFallback = currentUser?.name
+    ?.split(' ')
+    .map(word => word[0])
+    .slice(0, 2)
+    .join('')
 
   return <>
     {/* Mobile sidebar overlay */}
@@ -58,12 +70,13 @@ export default function Sidebar({ isSidebarOpen, setSidebarOpen }: sidebarProps)
         {/* User Info */}
         <div className="px-6 py-4 border-b border-slate-700 shrink-0">
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center">
-              <span className="text-white font-semibold text-sm">JD</span>
+            <div className="w-10 h-10 px-2 bg-orange-500 rounded-full flex items-center justify-center">
+              {/* {currentUser?.image && <Image src={currentUser.image} width={40} height={40} alt="User Avatar" />} */}
+              <span className="text-white font-semibold text-sm">{avatarFallback}</span>
             </div>
             <div>
-              <p className="text-white font-medium">John Doe</p>
-              <p className="text-slate-400 text-sm">Organizer</p>
+              <p className="w-36 text-white font-medium truncate">{currentUser?.name}</p>
+              <p className="text-slate-400 text-sm capitalize">{currentUser?.role?.toLowerCase()}</p>
             </div>
           </div>
         </div>
@@ -109,7 +122,7 @@ export default function Sidebar({ isSidebarOpen, setSidebarOpen }: sidebarProps)
 
         {/* Sign Out */}
         <div className="px-4 py-4 border-t border-slate-700 shrink-0">
-          <Button variant="ghost" className="w-full text-slate-300 hover:text-white hover:bg-slate-700! cursor-pointer">
+          <Button onClick={() => logout()} variant="ghost" className="w-full text-slate-300 hover:text-white hover:bg-slate-700! cursor-pointer">
             <LogOut className="h-4 w-4 mr-2" />
             Sign Out
           </Button>

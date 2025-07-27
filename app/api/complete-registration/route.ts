@@ -24,7 +24,7 @@ export async function POST(req: Request) {
       data: { role },
     });
 
-    return NextResponse.json({ success: true }, { status: 200 });
+    return NextResponse.json({ success: true, role }, { status: 200 });
   } catch (error) {
     console.log(error);
     return NextResponse.json(

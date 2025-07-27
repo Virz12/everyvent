@@ -5,9 +5,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Users, Calendar, Check } from "lucide-react"
 import Image from "next/image"
-import { signOut, useSession } from "next-auth/react"
+import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
-import { login } from "@/lib/actions/auth"
 
 export default function RoleSelectionForm() {
   const router = useRouter()
@@ -33,11 +32,9 @@ export default function RoleSelectionForm() {
     })
 
     if (res.ok) {
-      signOut({
-        redirect: false
+      await update({
+        role: selectedRole
       })
-
-      login();
       router.push(`/dashboard/${selectedRole.toLowerCase()}`)
     }
 

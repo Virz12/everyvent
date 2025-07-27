@@ -1,13 +1,18 @@
 'use client'
 
-import AccountForm from "@/components/dashboard/participant/form/account-form";
 import DeleteAccountDialog from "@/components/dashboard/delete-account-dialog";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useState } from "react";
+import { useSession } from "next-auth/react";
+import UpdateAccountForm from "@/components/dashboard/participant/form/update-account-form";
+import ChangePasswordForm from "@/components/dashboard/participant/form/change-password-form";
 
 export default function AccountPage() {
   const [isOpen, setIsOpen] = useState(false)
+
+  const { data: session } = useSession()
+  const currentUser = session?.user
 
   return (
     <div className="min-h-screen bg-slate-900">
@@ -36,11 +41,12 @@ export default function AccountPage() {
               </CardHeader>
               <CardContent>
                 {/* Form */}
-                <AccountForm />
+                <UpdateAccountForm />
               </CardContent>
             </Card>
+
             {/* Card Deleting Account */}
-            <div className="sticky top-0">
+            <div className="sticky top-0 order-last xl:order-2">
               <Card className="bg-slate-800 border-slate-700 pb-6">
                 <CardHeader>
                   <CardTitle className="text-white space-y-1.5 pt-6">
@@ -57,6 +63,18 @@ export default function AccountPage() {
                 </CardContent>
               </Card>
             </div>
+
+            {/* Card Account Information */}
+            <Card className="col-span-2 bg-slate-800 border-slate-700 pb-6 order-2 xl:order-last">
+              <CardHeader>
+                <CardTitle className="text-white space-y-1.5 pt-6">
+                  <h2 className="text-2xl tracking-tight">Change Password</h2>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ChangePasswordForm />
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>

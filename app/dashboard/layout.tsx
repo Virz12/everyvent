@@ -17,7 +17,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
   return (
     <div className="min-h-screen bg-slate-900 flex">
-      <Sidebar isSidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+      <SessionProvider>
+        <Sidebar isSidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+      </SessionProvider>
 
       {/* Main content */}
       <div className="flex-1 flex flex-col lg:ml-0">

@@ -5,13 +5,20 @@ import DeleteAccountDialog from "@/components/dashboard/delete-account-dialog";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useState } from "react";
+import { useSession } from "next-auth/react";
+import UpdateAccountForm from "@/components/dashboard/participant/form/update-account-form";
+import ChangePasswordForm from "@/components/dashboard/participant/form/change-password-form";
 
 export default function AccountPage() {
   const [isOpen, setIsOpen] = useState(false)
 
+  const { data: session } = useSession()
+  const currentUser = session?.user
+
   return (
     <div className="min-h-screen bg-slate-900">
-      <div className="bg-slate-800 py-8 px-4 lg:px-6 border-b border-slate-700">
+      {/* Header */}
+      <header className="bg-slate-800 py-8 px-4 lg:px-6 border-b border-slate-700">
         <div className="container mx-auto">
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
             <div>
@@ -20,37 +27,53 @@ export default function AccountPage() {
             </div>
           </div>
         </div>
-      </div>
+      </header>
 
       {/* Main Content */}
       <section className="py-8 px-4 lg:px-6">
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-y-6 xl:gap-x-6">
-          {/* Card Account Settings */}
-          <Card className="col-span-2 bg-slate-800 border-slate-700 pb-6">
-            <CardHeader>
-              <CardTitle className="text-white space-y-1.5 pt-6">
-                <h2 className="text-2xl tracking-tight">Account Settings</h2>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <AccountForm />
-            </CardContent>
-          </Card>
-          {/* Card Deleting Account */}
-          <div className="sticky top-0">
-            <Card className="bg-slate-800 border-slate-700 pb-6">
+        <div className="container mx-auto space-y-8">
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-y-6 xl:gap-x-6">
+            {/* Card Account Settings */}
+            <Card className="col-span-2 bg-slate-800 border-slate-700 pb-6">
               <CardHeader>
                 <CardTitle className="text-white space-y-1.5 pt-6">
-                  <h2 className="text-2xl tracking-tight">Delete Account</h2>
-                  <p className="text-slate-300 text-base font-normal">Once you delete your account, there is no going back. Please be certain.</p>
+                  <h2 className="text-2xl tracking-tight">Account Settings</h2>
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <Button
-                  className="w-full bg-red-500 hover:bg-red-600 text-white cursor-pointer"
-                  onClick={() => setIsOpen(true)}>
-                  Delete Account
-                </Button>
+                {/* Form */}
+                <UpdateAccountForm />
+              </CardContent>
+            </Card>
+
+            {/* Card Deleting Account */}
+            <div className="sticky top-0 order-last xl:order-2">
+              <Card className="bg-slate-800 border-slate-700 pb-6">
+                <CardHeader>
+                  <CardTitle className="text-white space-y-1.5 pt-6">
+                    <h2 className="text-2xl tracking-tight">Delete Account</h2>
+                    <p className="text-slate-300 text-base font-normal">Once you delete your account, there is no going back. Please be certain.</p>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Button
+                    className="w-full bg-red-500 hover:bg-red-600 text-white cursor-pointer"
+                    onClick={() => setIsOpen(true)}>
+                    Delete Account
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Card Account Information */}
+            <Card className="col-span-2 bg-slate-800 border-slate-700 pb-6 order-2 xl:order-last">
+              <CardHeader>
+                <CardTitle className="text-white space-y-1.5 pt-6">
+                  <h2 className="text-2xl tracking-tight">Change Password</h2>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ChangePasswordForm />
               </CardContent>
             </Card>
           </div>

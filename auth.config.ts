@@ -56,4 +56,29 @@ export default {
       },
     }),
   ],
+  callbacks: {
+    async jwt({ token, user, trigger, session }) {
+      if (user) {
+        token.id = user.id;
+        token.role = user.role;
+      }
+
+      if (trigger === "update" && session) {
+        token.name = session.name ?? token.name;
+        token.role = session.role ?? token.role;
+      }
+
+      return token;
+    },
+    async session({ session, token }) {
+      if (session.user) {
+        session.user.id = token.id as string;
+        session.user.name = token.name as string;
+        session.user.email = token.email as string;
+        session.user.role = token.role as string;
+      }
+
+      return session;
+    },
+  },
 } satisfies NextAuthConfig;

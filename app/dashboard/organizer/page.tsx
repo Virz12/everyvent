@@ -65,8 +65,8 @@ export default function DashboardContent() {
       <div className="bg-slate-800 py-8 px-4 lg:px-6 border-b border-slate-700">
         <div className="container mx-auto">
           <div>
-            {/* <h1 className="text-3xl lg:text-4xl font-bold text-white mb-2">Welcome back, {session?.user?.name}</h1>
-            <p className="text-slate-300">{session?.user?.role} • Organizer Dashboard</p> */}
+            <h1 className="text-3xl lg:text-4xl font-bold text-white mb-2">Welcome back, {session?.user?.name}</h1>
+            <p className="text-slate-300 capitalize">{session?.user?.role?.toLowerCase()} • Dashboard</p>
           </div>
         </div>
       </div>
