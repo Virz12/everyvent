@@ -1,16 +1,11 @@
+'use client'
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Calendar, Search, Clock, Star } from "lucide-react"
 import Link from "next/link"
 import EventCard from "@/components/dashboard/participant/event-card"
-
-// Mock user data
-const currentUser = {
-  id: 1,
-  name: "Jane Smith",
-  email: "jane@example.com",
-  role: "participant",
-}
+import { useSession } from "next-auth/react"
 
 // Mock registered events
 const registeredEvents = [
@@ -56,6 +51,9 @@ const registeredEvents = [
 ]
 
 export default function ParticipantDashboard() {
+  const { data: session } = useSession()
+  const currentUser = session?.user
+
   return (
     <div className="min-h-screen bg-slate-900">
       {/* Header */}
@@ -63,8 +61,8 @@ export default function ParticipantDashboard() {
         <div className="container mx-auto">
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
             <div>
-              <h1 className="text-3xl lg:text-4xl font-bold text-white mb-2">Welcome back, {currentUser.name}</h1>
-              <p className="text-slate-300">Discover and join amazing events</p>
+              <h1 className="text-3xl lg:text-4xl font-bold text-white mb-2">Welcome back, {currentUser?.name}</h1>
+              <p className="text-slate-300 capitalize">{session?.user?.role?.toLowerCase()} • Dashboard</p>
             </div>
             <Link href="/events">
               <Button className="bg-orange-500 hover:bg-orange-600 text-white cursor-pointer">

@@ -28,9 +28,11 @@ export function Header() {
 
         {/* User Actions */}
         <div className="flex items-center space-x-4">
-          <Button variant="ghost" size="icon" className="text-slate-300 hover:text-slate-300 cursor-pointer">
-            <User className="h-5 w-5" />
-          </Button>
+          <Link href={'/dashboard/participant'}>
+            <Button variant="ghost" size="icon" className="text-slate-300 hover:text-slate-300 cursor-pointer">
+              <User className="h-5 w-5" />
+            </Button>
+          </Link>
           <Link href="/signin">
             <Button className="bg-orange-500 hover:bg-orange-600 text-white cursor-pointer">Sign In</Button>
           </Link>

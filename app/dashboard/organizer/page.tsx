@@ -3,15 +3,7 @@
 import { useState } from "react"
 import RecentEvents from "./recent-event"
 import StatsCard from "./stats-card"
-
-// Mock user data - in real app this would come from auth context
-const currentUser = {
-  id: 1,
-  name: "John Doe",
-  email: "john@example.com",
-  role: "organizer",
-  organization: "TechCorp Events",
-}
+import { useSession } from "next-auth/react"
 
 // Mock events data - in real app this would come from API
 const initialEvents = [
@@ -64,14 +56,17 @@ const initialEvents = [
 
 export default function DashboardContent() {
   const [events] = useState(initialEvents)
+  const { data: session, status } = useSession();
+
+  console.log(session, status);
 
   return (
     <div className="min-h-screen bg-slate-900">
       <div className="bg-slate-800 py-8 px-4 lg:px-6 border-b border-slate-700">
         <div className="container mx-auto">
           <div>
-            <h1 className="text-3xl lg:text-4xl font-bold text-white mb-2">Welcome back, {currentUser.name}</h1>
-            <p className="text-slate-300">{currentUser.organization} • Organizer Dashboard</p>
+            <h1 className="text-3xl lg:text-4xl font-bold text-white mb-2">Welcome back, {session?.user?.name}</h1>
+            <p className="text-slate-300 capitalize">{session?.user?.role?.toLowerCase()} • Dashboard</p>
           </div>
         </div>
       </div>

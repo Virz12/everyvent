@@ -1,7 +1,11 @@
+'use client'
+
 import { Eye, EyeOff, Lock, Mail } from "lucide-react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { useState } from "react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 interface SignInFormProps {
   isLoading: boolean
@@ -12,7 +16,9 @@ export default function SignInForm({
   isLoading,
   setIsLoading
 }: SignInFormProps) {
+  const router = useRouter()
   const [showPassword, setShowPassword] = useState(false)
+  const [errors, setErrors] = useState('')
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -27,27 +33,23 @@ export default function SignInForm({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
     setIsLoading(true)
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-
-    // Mock user data - in real app this would come from API response
-    const mockUser = {
+    const res = await signIn("credentials", {
       email: formData.email,
-      role: formData.email.includes("organizer") ? "organizer" : "participant", // Mock logic
+      password: formData.password,
+      redirect: false
+    })
+
+    if (res?.error) {
+      console.log(res)
+      setErrors(res.code as unknown as string)
+      setIsLoading(false)
+      return
     }
 
-    console.log("Sign in attempt:", formData)
-
-    // Redirect based on role
-    if (mockUser.role === "organizer") {
-      window.location.href = "/dashboard"
-    } else {
-      window.location.href = "/events"
-    }
-
-    setIsLoading(false)
+    router.push('/dashboard/organizer')
   }
 
   return <>
@@ -96,6 +98,8 @@ export default function SignInForm({
           </button>
         </div>
       </div>
+
+      {errors && <p className="text-sm text-red-500">{errors}</p>}
 
       <Button
         type="submit"

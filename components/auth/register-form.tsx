@@ -1,12 +1,16 @@
+'use client'
+
 import { Eye, EyeOff, Lock, Mail, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { Label } from "@/components/ui/label";
+import { redirect } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 interface RegisterFormprops {
   isLoading: boolean,
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
+  setIsLoading: (React.Dispatch<React.SetStateAction<boolean>>)
 }
 
 export default function RegisterForm({
@@ -62,16 +66,21 @@ export default function RegisterForm({
 
     setIsLoading(true)
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    const res = await fetch('/api/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
 
-    console.log("Registration attempt:", formData)
+    if (res.ok) {
+      await signIn("credentials", {
+        email: formData.email,
+        password: formData.password,
+      });
 
-    // Redirect based on role
-    if (formData.role === "organizer") {
-      window.location.href = "/dashboard"
-    } else {
-      window.location.href = "/events"
+      redirect(`/dashboard/${formData.role.toLowerCase()}`)
     }
 
     setIsLoading(false)
@@ -203,8 +212,8 @@ export default function RegisterForm({
             <input
               type="radio"
               name="role"
-              value="participant"
-              checked={formData.role === "participant"}
+              value="PARTICIPANT"
+              checked={formData.role === "PARTICIPANT"}
               onChange={(e) => handleInputChange("role", e.target.value)}
               className="mt-1"
             />
@@ -219,8 +228,8 @@ export default function RegisterForm({
             <input
               type="radio"
               name="role"
-              value="organizer"
-              checked={formData.role === "organizer"}
+              value="ORGANIZER"
+              checked={formData.role === "ORGANIZER"}
               onChange={(e) => handleInputChange("role", e.target.value)}
               className="mt-1"
             />
