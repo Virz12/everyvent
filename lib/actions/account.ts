@@ -4,16 +4,10 @@ import * as z from "zod";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/auth";
 import { compare, hash } from "bcryptjs";
-
-const updateAccountSchema = z.object({
-  name: z.string().nonempty("Name is required"),
-  description: z.string().nullable(),
-});
-
-const changePasswordSchema = z.object({
-  currentPassword: z.string().min(8, "Password must be at least 8 characters"),
-  newPassword: z.string().min(8, "Password must be at least 8 characters"),
-});
+import {
+  changePasswordSchema,
+  updateAccountSchema,
+} from "@/lib/validations/zodSchema";
 
 export const getAccount = async () => {
   const session = await auth();
