@@ -6,18 +6,25 @@ import { Button } from "./ui/button"
 import Link from "next/link"
 import { getPreviewEvents } from "@/lib/actions/event"
 import { EventType } from "@/lib/types"
+import { Loading } from "./loading"
 
 export function EventsGrid() {
+  const [isLoading, setIsLoading] = useState(true)
   const [data, setData] = useState<EventType[] | null>(null);
 
   useEffect(() => {
     async function fetchEvent() {
       const response = await getPreviewEvents();
       setData(response);
+      setIsLoading(false);
     }
 
     fetchEvent();
   }, [])
+
+  if (isLoading) {
+    return <Loading />
+  }
 
   return (
     <section className="bg-slate-900 py-20 px-4 lg:px-6">

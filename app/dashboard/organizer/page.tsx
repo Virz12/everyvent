@@ -6,8 +6,10 @@ import StatsCard from "./stats-card"
 import { useSession } from "next-auth/react"
 import { useEffect, useState } from "react";
 import { DashboardDataProps } from "@/lib/types";
+import { Loading } from "@/components/loading";
 
 export default function DashboardContent() {
+  const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState<DashboardDataProps | null>(null);
   const { data: session } = useSession();
 
@@ -15,10 +17,15 @@ export default function DashboardContent() {
     async function fetchEvent() {
       const response = await getDashboardData();
       setData(response);
+      setIsLoading(false);
     }
 
     fetchEvent();
   }, [])
+
+  if (isLoading) {
+    return <Loading />
+  }
 
   return (
     <div className="min-h-screen bg-slate-900">

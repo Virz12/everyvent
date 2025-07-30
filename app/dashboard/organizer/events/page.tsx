@@ -9,8 +9,10 @@ import { DeleteEventDialog } from "@/components/dashboard/organizer/modal/delete
 import EventCard from "@/components/dashboard/organizer/event-card"
 import { CreateEventType, EventType } from "@/lib/types"
 import { deleteEvent, getEvents, updateEvent } from "@/lib/actions/organizer"
+import { Loading } from "@/components/loading"
 
 export default function MyEventsPage() {
+  const [isLoading, setIsLoading] = useState(true)
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)
   const [editingEvent, setEditingEvent] = useState<EventType | null>(null)
   const [deletingEvent, setDeletingEvent] = useState<EventType | null>(null)
@@ -23,6 +25,7 @@ export default function MyEventsPage() {
   async function loadEvents() {
     const data = await getEvents();
     setEvents(data);
+    setIsLoading(false);
   }
 
   const handleEditEvent = async (eventData: CreateEventType) => {
@@ -35,6 +38,10 @@ export default function MyEventsPage() {
     await deleteEvent(eventId)
     setDeletingEvent(null)
     loadEvents()
+  }
+
+  if (isLoading) {
+    return <Loading />
   }
 
   return (

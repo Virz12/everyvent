@@ -46,6 +46,9 @@ export default function EventCard({ event, onEditClick, onDeleteClick }: EventCa
           <div className="flex items-start justify-between">
             <div className="space-y-2">
               <div className="flex items-center space-x-2">
+                <Badge variant="secondary" className="bg-slate-700 text-slate-300 capitalize">
+                  {event?.category.replace('_', ' ').toLowerCase()}
+                </Badge>
                 <Badge variant="secondary" className="bg-slate-700 text-slate-300 text-xs">
                   {event.duration}
                 </Badge>
