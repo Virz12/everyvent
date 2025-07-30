@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { Calendar, Clock, MapPin, Users } from "lucide-react"
-import { createEvent } from "@/lib/actions/event"
+import { createEvent } from "@/lib/actions/organizer"
 import { format, parse } from 'date-fns'
 
 interface CreateEventFormProps {
@@ -30,6 +30,7 @@ export default function CreateEventForm({ onClose }: CreateEventFormProps) {
       title: formData.get("title") as string,
       description: formData.get("description") as string,
       dateTime,
+      category: formData.get("category") as "CONFERENCE" | "WORKSHOP" | "CAREER_FAIR" | "MEETUP" | "HACKATHON",
       duration: formData.get("duration") as string,
       location: formData.get("location") as string,
       max_attendees: Number(formData.get("max_attendees")),

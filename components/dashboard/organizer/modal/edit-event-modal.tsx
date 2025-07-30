@@ -4,24 +4,13 @@ import type React from "react"
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import EditEventForm from "@/components/dashboard/organizer/form/edit-event-form"
-
-interface EventTypeForm {
-  title: string
-  category: string
-  date: string
-  time: string
-  duration: string
-  location: string
-  maxAttendees: number
-  status: string
-  description: string
-}
+import { CreateEventType } from "@/lib/types"
 
 interface EditEventModalProps {
   isOpen: boolean
   onClose: () => void
-  onSubmit: (eventData: EventTypeForm) => void
-  event: EventTypeForm
+  onSubmit: (eventData: CreateEventType) => void
+  event: CreateEventType
 }
 
 export function EditEventModal({ isOpen, onClose, onSubmit, event }: EditEventModalProps) {

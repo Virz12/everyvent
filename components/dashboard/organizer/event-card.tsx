@@ -7,11 +7,11 @@ import { format } from "date-fns"
 
 interface EventCardType {
   event: EventType
-  // onEditClick: () => void
-  // onDeleteClick: () => void
+  onEditClick: () => void
+  onDeleteClick: () => void
 }
 
-export default function EventCard({ event }: EventCardType) {
+export default function EventCard({ event, onEditClick, onDeleteClick }: EventCardType) {
   const date = format(event.dateTime, 'MMMM dd, yyyy')
   const time = format(event.dateTime, 'HH:mm')
 
@@ -72,7 +72,6 @@ export default function EventCard({ event }: EventCardType) {
             <div className="flex items-center space-x-2">
               <Users className="h-4 w-4 text-orange-500" />
               <span>
-                {/* TODO: attendees */}
                 {event._count.attendeesList}/{event.max_attendees} attendees
               </span>
             </div>
@@ -82,7 +81,7 @@ export default function EventCard({ event }: EventCardType) {
             <Button
               size="sm"
               variant="outline"
-              // onClick={onEditClick}
+              onClick={onEditClick}
               className="flex-1 border-slate-600 text-slate-300 hover:bg-slate-700 cursor-pointer"
             >
               <Edit className="h-4 w-4 mr-1" />
@@ -91,7 +90,7 @@ export default function EventCard({ event }: EventCardType) {
             <Button
               size="sm"
               variant="outline"
-              // onClick={onDeleteClick}
+              onClick={onDeleteClick}
               className="text-red-400 hover:text-red-300 cursor-pointer"
             >
               <Trash2 className="h-4 w-4" />

@@ -2,40 +2,40 @@
 
 import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Plus, Calendar } from "lucide-react"
+import { Calendar, Plus } from "lucide-react"
 import { CreateEventModal } from "@/components/dashboard/organizer/modal/create-event-modal"
 import { EditEventModal } from "@/components/dashboard/organizer/modal/edit-event-modal"
 import { DeleteEventDialog } from "@/components/dashboard/organizer/modal/delete-event-dialog"
 import EventCard from "@/components/dashboard/organizer/event-card"
-import { EventType } from "@/lib/types"
-import { getEvents } from "@/lib/actions/event"
+import { CreateEventType, EventType } from "@/lib/types"
+import { deleteEvent, getEvents, updateEvent } from "@/lib/actions/organizer"
 
 export default function MyEventsPage() {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)
-  // const [editingEvent, setEditingEvent] = useState<EventType | null>(null)
-  // const [deletingEvent, setDeletingEvent] = useState<EventType | null>(null)
+  const [editingEvent, setEditingEvent] = useState<EventType | null>(null)
+  const [deletingEvent, setDeletingEvent] = useState<EventType | null>(null)
   const [events, setEvents] = useState<EventType[]>([]);
 
   useEffect(() => {
-    async function loadEvents() {
-      const data = await getEvents();
-      console.log(data);
-
-      setEvents(data);
-    }
-
     loadEvents();
   }, []);
 
-  // const handleEditEvent = (eventData: EventTypeForm) => {
-  //   setEvents(events.map((event: EventType) => (event.id === editingEvent?.id ? { ...event, ...eventData } : event)))
-  //   setEditingEvent(null)
-  // }
+  async function loadEvents() {
+    const data = await getEvents();
+    setEvents(data);
+  }
 
-  // const handleDeleteEvent = (eventId: number) => {
-  //   setEvents(events.filter((event) => event.id !== eventId))
-  //   setDeletingEvent(null)
-  // }
+  const handleEditEvent = async (eventData: CreateEventType) => {
+    await updateEvent(editingEvent?.id as string, eventData)
+    setEditingEvent(null)
+    loadEvents()
+  }
+
+  const handleDeleteEvent = async (eventId: string) => {
+    await deleteEvent(eventId)
+    setDeletingEvent(null)
+    loadEvents()
+  }
 
   return (
     <div className="min-h-screen bg-slate-900">
@@ -61,18 +61,18 @@ export default function MyEventsPage() {
           </div>
 
           {/* Events list */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
             {events.map((event) => (
               <EventCard
                 key={event.id}
                 event={event}
-              // onEditClick={() => setEditingEvent(event)}
-              // onDeleteClick={() => setDeletingEvent(event)}
+                onEditClick={() => setEditingEvent(event)}
+                onDeleteClick={() => setDeletingEvent(event)}
               />
             ))}
           </div>
 
-          {/* {events.length === 0 && (
+          {events.length === 0 && (
             <div className="text-center py-12">
               <Calendar className="h-16 w-16 text-slate-600 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-white mb-2">No events yet</h3>
@@ -85,7 +85,7 @@ export default function MyEventsPage() {
                 Create Your First Event
               </Button>
             </div>
-          )} */}
+          )}
         </div>
       </div>
 
@@ -95,7 +95,7 @@ export default function MyEventsPage() {
         onClose={() => setIsCreateModalOpen(false)}
       />
 
-      {/* {editingEvent && (
+      {editingEvent && (
         <EditEventModal
           isOpen={!!editingEvent}
           onClose={() => setEditingEvent(null)}
@@ -111,7 +111,7 @@ export default function MyEventsPage() {
           onConfirm={() => handleDeleteEvent(deletingEvent.id)}
           eventTitle={deletingEvent.title}
         />
-      )} */}
+      )}
     </div>
   )
 }
