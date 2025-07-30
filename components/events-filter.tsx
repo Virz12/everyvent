@@ -1,31 +1,24 @@
 "use client"
 
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Users, Calendar, MapPin, Star, Heart } from "lucide-react"
-
-type SortOption = "popularity" | "date"
+import { Presentation, Lightbulb, BriefcaseBusiness, Handshake, CloudCog, Calendar } from "lucide-react"
 
 interface EventsFilterProps {
   onCategoryChange: (category: string) => void
-  onSortChange: (sort: SortOption) => void
   activeCategory: string
-  sortBy: string
 }
 
 const categories = [
-  { id: "team-building", label: "Team Building", icon: Users },
-  { id: "networking", label: "Networking Mixer", icon: Users },
-  { id: "executive", label: "Executive Retreat", icon: Star },
-  { id: "milestone", label: "Milestone Celebration", icon: Calendar },
-  { id: "holiday", label: "Holiday Party", icon: Heart },
-  { id: "offsite", label: "Offsite Retreat", icon: MapPin },
+  { id: "", label: "All Events", icon: Calendar },
+  { id: "CONFERENCE", label: "Conference", icon: Presentation },
+  { id: "WORKSHOP", label: "Workshop", icon: CloudCog },
+  { id: "CAREER_FAIR", label: "Career Fair", icon: BriefcaseBusiness },
+  { id: "MEETUP", label: "Meetup", icon: Handshake },
+  { id: "HACKATHON", label: "Hackathon", icon: Lightbulb },
 ]
 
 export function EventsFilter({
   onCategoryChange,
-  onSortChange,
   activeCategory,
-  sortBy,
 }: EventsFilterProps) {
   return (
     <div className="space-y-8">
@@ -64,26 +57,6 @@ export function EventsFilter({
           <h2 className="text-2xl lg:text-3xl font-bold text-white capitalize">
             {categories.find((c) => c.id === activeCategory)?.label || "All Events"}
           </h2>
-        </div>
-
-        <div className="flex items-center space-x-4">
-          {/* Sort Dropdown */}
-          <div className="flex items-center space-x-2">
-            <span className="text-slate-300 text-sm">Sort by</span>
-            <Select value={sortBy} onValueChange={onSortChange}>
-              <SelectTrigger className="w-40 bg-slate-800 border-slate-700 text-white cursor-pointer">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent className="bg-slate-800 border-slate-700">
-                <SelectItem value="popularity" className="text-white hover:bg-slate-700!">
-                  Most popular
-                </SelectItem>
-                <SelectItem value="date" className="text-white hover:bg-slate-700!">
-                  Closest date
-                </SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
         </div>
       </div>
     </div>

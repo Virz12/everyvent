@@ -111,6 +111,7 @@ export default function EditEventForm({ onSubmit, onClose, event }: EditEventFor
             name="date"
             defaultValue={event.dateTime.toISOString().split("T")[0]}
             className={`bg-slate-700 border-slate-600 text-white block`}
+            required
           />
           {/* {errors.date && <p className="text-red-400 text-sm">{errors.date}</p>} */}
         </div>
@@ -126,6 +127,7 @@ export default function EditEventForm({ onSubmit, onClose, event }: EditEventFor
             name="time"
             defaultValue={event.dateTime.toISOString().split("T")[1]}
             className={`bg-slate-700 border-slate-600 text-white block`}
+            required
           />
           {/* {errors.time && <p className="text-red-400 text-sm">{errors.time}</p>} */}
         </div>

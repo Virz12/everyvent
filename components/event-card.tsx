@@ -3,45 +3,16 @@ import { Badge } from "./ui/badge"
 import { Card, CardContent } from "./ui/card"
 import { Button } from "./ui/button"
 import Link from "next/link"
+import { EventType } from "@/lib/types"
+import { format } from "date-fns"
 
 interface EventCardProps {
-  event: {
-    id: number
-    title: string
-    category: string
-    date: string
-    time: string
-    duration: string
-    location: string
-    attendees: number
-    organizer: string
-    maxAttendees: number
-    image: string
-    description: string
-  }
+  event: EventType
 }
 
 export default function EventCard({ event }: EventCardProps) {
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString)
-    return date.toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    })
-  }
-
-  const getDaysUntilEvent = (dateString: string) => {
-    const eventDate = new Date(dateString)
-    const today = new Date()
-    const diffTime = eventDate.getTime() - today.getTime()
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-
-    if (diffDays === 0) return "Today"
-    if (diffDays === 1) return "Tomorrow"
-    if (diffDays > 0) return `${diffDays} days`
-    return "Past event"
-  }
+  const date = format(event.dateTime, 'MMMM dd, yyyy')
+  const time = format(event.dateTime, 'HH:mm')
 
   return (
     <Card
@@ -50,7 +21,7 @@ export default function EventCard({ event }: EventCardProps) {
     >
       <div className="relative">
         <img
-          src={event.image || "https://placehold.co/300x200"}
+          src={"https://placehold.co/300x200"}
           alt={event.title}
           className="object-cover w-full h-48"
         />
@@ -61,14 +32,16 @@ export default function EventCard({ event }: EventCardProps) {
           <div className="flex items-start justify-between">
             <div className="space-y-2">
               <div className="flex items-center space-x-2">
+                <Badge variant="secondary" className="bg-slate-700 text-slate-300 capitalize">
+                  {event?.category.replace('_', ' ').toLowerCase()}
+                </Badge>
                 <Badge variant="secondary" className="bg-slate-700 text-slate-300 text-xs">
                   {event.duration}
                 </Badge>
-                <span className="text-slate-400 text-xs">{getDaysUntilEvent(event.date)}</span>
               </div>
               <div>
                 <h3 className="text-white font-semibold text-lg leading-tight">{event.title}</h3>
-                <span className="text-slate-400 text-sm">by {event.organizer}</span>
+                <span className="text-slate-400 text-sm">by {event.organizerName}</span>
               </div>
             </div>
           </div>
@@ -77,7 +50,7 @@ export default function EventCard({ event }: EventCardProps) {
             <div className="flex items-center space-x-2">
               <Calendar className="h-4 w-4 text-orange-500" />
               <span>
-                {formatDate(event.date)} at {event.time}
+                {date} at {time}
               </span>
             </div>
             <div className="flex items-center space-x-2">
@@ -87,7 +60,7 @@ export default function EventCard({ event }: EventCardProps) {
             <div className="flex items-center space-x-2">
               <Users className="h-4 w-4 text-orange-500" />
               <span>
-                {event.attendees}/{event.maxAttendees} attending
+                {event._count.attendeesList}/{event.max_attendees} attending
               </span>
             </div>
           </div>

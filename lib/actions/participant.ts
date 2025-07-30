@@ -27,6 +27,26 @@ export async function registerEvent(eventId: string) {
     throw new Error("You already joined this event");
   }
 
+  // Check max attendees
+  const currentCount = await prisma.joinedEvent.count({
+    where: {
+      eventId,
+    },
+  });
+
+  const event = await prisma.event.findUnique({
+    where: { id: eventId },
+    select: { max_attendees: true },
+  });
+
+  if (!event) {
+    throw new Error("Event not found");
+  }
+
+  if (currentCount >= event.max_attendees) {
+    throw new Error("This event is already full");
+  }
+
   // Register the participant
   await prisma.joinedEvent.create({
     data: {

@@ -91,26 +91,6 @@ export default function UpdateAccountForm() {
               disabled />
           </div>
         </div>
-        {/* <div className="flex flex-col md:flex-row justify-between shrink space-y-4 md:space-y-0 space-x-4">
-          <Label htmlFor="phone" className="items-start text-slate-300">Phone Number</Label>
-          <div className="w-auto md:w-1/2">
-            <Input
-              type="text"
-              id="phone"
-              className=""
-              placeholder="+1 (123) 456-7890" />
-          </div>
-        </div> */}
-        {/* Profile Picture */}
-        <div className="flex flex-col md:flex-row justify-between shrink space-y-4 md:space-y-0 space-x-4">
-          <Label htmlFor="avatar" className="items-start text-slate-300">Profile Picture</Label>
-          <div className="w-auto md:w-1/2">
-            <Input
-              type="file"
-              id="avatar"
-              className="text-xs" />
-          </div>
-        </div>
         {/* Button */}
         <div>
           <Button
