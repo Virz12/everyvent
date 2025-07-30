@@ -26,22 +26,23 @@ model User {
 }
 
 model Event {
-  id            String          @id @default(cuid())
-  organizerId   String
-  title         String
-  description   String
-  dateTime      DateTime
-  duration      String
-  location      String
-  category      EventCategory   @default(CONFERENCE)
-  max_attendees Int
-  status        Status          @default(DRAFT)
+  id              String          @id @default(cuid())
+  organizerId     String
+  organizerName   String
+  title           String
+  description     String
+  dateTime        DateTime
+  duration        String
+  location        String
+  category        EventCategory   @default(CONFERENCE)
+  max_attendees   Int
+  status          Status          @default(DRAFT)
 
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
 
-  organizer     User            @relation("createdEvents", fields: [organizerId], references: [id], onDelete: Cascade)
-  attendeesList JoinedEvent[]
+  organizer       User            @relation("createdEvents", fields: [organizerId], references: [id], onDelete: Cascade)
+  attendeesList   JoinedEvent[]
 }
 
 model JoinedEvent {

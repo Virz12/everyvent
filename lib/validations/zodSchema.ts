@@ -29,6 +29,9 @@ export const createEventSchema = z.object({
   description: z.string().min(1),
   dateTime: z.coerce.date(),
   duration: z.string(),
+  category: z
+    .enum(["CONFERENCE", "WORKSHOP", "CAREER_FAIR", "MEETUP", "HACKATHON"])
+    .default("CONFERENCE"),
   location: z.string(),
   max_attendees: z.int("").positive(),
   status: z.enum(["DRAFT", "PUBLISHED"]).default("DRAFT"),
