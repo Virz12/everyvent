@@ -1,102 +1,49 @@
-import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { Calendar, Clock, MapPin, Users } from "lucide-react"
-
-export interface EventTypeForm {
-  title: string
-  category: string
-  date: string
-  time: string
-  duration: string
-  location: string
-  maxAttendees: number
-  status: string
-  description: string
-}
+import { createEvent } from "@/lib/actions/organizer"
+import { format, parse } from 'date-fns'
 
 interface CreateEventFormProps {
   onClose: () => void
-  onSubmit: (eventData: EventTypeForm) => void
 }
 
-export default function CreateEventForm({ onSubmit, onClose }: CreateEventFormProps) {
-  const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    category: "",
-    date: "",
-    time: "",
-    duration: "",
-    location: "",
-    maxAttendees: "",
-    status: "draft",
-    image: "https://placehold.co/300x200",
-  })
-
-  const [errors, setErrors] = useState<Record<string, string>>({})
-
+export default function CreateEventForm({ onClose }: CreateEventFormProps) {
   const categories = [
-    { value: "team-building", label: "Team Building" },
-    { value: "networking", label: "Networking" },
-    { value: "executive", label: "Executive" },
-    { value: "milestone", label: "Milestone" },
-    { value: "holiday", label: "Holiday" },
-    { value: "offsite", label: "Offsite" },
+    { value: "CONFERENCE", label: "Conference" },
+    { value: "WORKSHOP", label: "Workshop" },
+    { value: "CAREER_FAIR", label: "Career Fair" },
+    { value: "MEETUP", label: "Meetup" },
+    { value: "HACKATHON", label: "Hackathon" },
   ]
 
-  const validateForm = () => {
-    const newErrors: Record<string, string> = {}
+  async function handleSubmit(formData: FormData) {
+    const date = format(new Date(formData.get("date") as string), 'yyyy/MM/dd')
+    const time = formData.get("time") as string
 
-    if (!formData.title.trim()) newErrors.title = "Title is required"
-    if (!formData.description.trim()) newErrors.description = "Description is required"
-    if (!formData.category) newErrors.category = "Category is required"
-    if (!formData.date) newErrors.date = "Date is required"
-    if (!formData.time) newErrors.time = "Time is required"
-    if (!formData.duration.trim()) newErrors.duration = "Duration is required"
-    if (!formData.location.trim()) newErrors.location = "Location is required"
-    if (!formData.maxAttendees || Number.parseInt(formData.maxAttendees) < 1) {
-      newErrors.maxAttendees = "Max attendees must be at least 1"
-    }
+    const dateTime = parse(`${date} ${time}`, 'yyyy/MM/dd HH:mm', new Date())
 
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
-  }
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (validateForm()) {
-      onSubmit({
-        ...formData,
-        maxAttendees: Number.parseInt(formData.maxAttendees),
-      })
-      setFormData({
-        title: "",
-        description: "",
-        category: "",
-        date: "",
-        time: "",
-        duration: "",
-        location: "",
-        maxAttendees: "",
-        status: "draft",
-        image: "https://placehold.co/300x200",
-      })
-      setErrors({})
-    }
-  }
+    const data = {
+      title: formData.get("title") as string,
+      description: formData.get("description") as string,
+      dateTime,
+      category: formData.get("category") as "CONFERENCE" | "WORKSHOP" | "CAREER_FAIR" | "MEETUP" | "HACKATHON",
+      duration: formData.get("duration") as string,
+      location: formData.get("location") as string,
+      max_attendees: Number(formData.get("max_attendees")),
+      status: formData.get("status") as "DRAFT" | "PUBLISHED",
+    };
 
-  const handleInputChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
-    if (errors[field]) {
-      setErrors((prev) => ({ ...prev, [field]: "" }))
-    }
+    await createEvent(data);
+
+    onClose();
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form action={handleSubmit} className="space-y-6">
       <div className="grid grid-cols-6 gap-6">
         <div className="space-y-2 col-span-3">
           <Label htmlFor="title" className="text-slate-300">
@@ -104,21 +51,21 @@ export default function CreateEventForm({ onSubmit, onClose }: CreateEventFormPr
           </Label>
           <Input
             id="title"
-            value={formData.title}
-            onChange={(e) => handleInputChange("title", e.target.value)}
+            name="title"
             placeholder="Enter event title"
-            className={`bg-slate-700 border-slate-600 text-white ${errors.title ? "border-red-500" : ""}`}
+            className={`bg-slate-700 border-slate-600 text-white`}
+            required
           />
-          {errors.title && <p className="text-red-400 text-sm">{errors.title}</p>}
+          {/* {errors.title && <p className="text-red-400 text-sm">{errors.title}</p>} */}
         </div>
 
         <div className="space-y-2 col-span-3">
           <Label htmlFor="category" className="text-slate-300">
             Category *
           </Label>
-          <Select value={formData.category} onValueChange={(value) => handleInputChange("category", value)}>
+          <Select defaultValue="CONFERENCE" name="category">
             <SelectTrigger
-              className={`bg-slate-700 border-slate-600 text-white ${errors.category ? "border-red-500" : ""}`}
+              className={`bg-slate-700 border-slate-600 text-white`}
             >
               <SelectValue placeholder="Select category" />
             </SelectTrigger>
@@ -130,7 +77,7 @@ export default function CreateEventForm({ onSubmit, onClose }: CreateEventFormPr
               ))}
             </SelectContent>
           </Select>
-          {errors.category && <p className="text-red-400 text-sm">{errors.category}</p>}
+          {/* {errors.category && <p className="text-red-400 text-sm">{errors.category}</p>} */}
         </div>
 
         <div className="space-y-2 col-span-6">
@@ -139,13 +86,12 @@ export default function CreateEventForm({ onSubmit, onClose }: CreateEventFormPr
           </Label>
           <Textarea
             id="description"
-            value={formData.description}
-            onChange={(e) => handleInputChange("description", e.target.value)}
+            name="description"
             placeholder="Describe your event..."
             rows={4}
-            className={`bg-slate-700 border-slate-600 text-white ${errors.description ? "border-red-500" : ""}`}
+            className={`bg-slate-700 border-slate-600 text-white`}
           />
-          {errors.description && <p className="text-red-400 text-sm">{errors.description}</p>}
+          {/* {errors.description && <p className="text-red-400 text-sm">{errors.description}</p>} */}
         </div>
 
         <div className="space-y-2 col-span-3 md:col-span-2">
@@ -156,11 +102,11 @@ export default function CreateEventForm({ onSubmit, onClose }: CreateEventFormPr
           <Input
             id="date"
             type="date"
-            value={formData.date}
-            onChange={(e) => handleInputChange("date", e.target.value)}
-            className={`bg-slate-700 border-slate-600 text-white block ${errors.date ? "border-red-500" : ""}`}
+            name="date"
+            className={`bg-slate-700 border-slate-600 text-white block`}
+            required
           />
-          {errors.date && <p className="text-red-400 text-sm">{errors.date}</p>}
+          {/* {errors.date && <p className="text-red-400 text-sm">{errors.date}</p>} */}
         </div>
 
         <div className="space-y-2 col-span-3 md:col-span-2">
@@ -171,11 +117,11 @@ export default function CreateEventForm({ onSubmit, onClose }: CreateEventFormPr
           <Input
             id="time"
             type="time"
-            value={formData.time}
-            onChange={(e) => handleInputChange("time", e.target.value)}
-            className={`bg-slate-700 border-slate-600 text-white block ${errors.time ? "border-red-500" : ""}`}
+            name="time"
+            className={`bg-slate-700 border-slate-600 text-white block`}
+            required
           />
-          {errors.time && <p className="text-red-400 text-sm">{errors.time}</p>}
+          {/* {errors.time && <p className="text-red-400 text-sm">{errors.time}</p>} */}
         </div>
 
         <div className="space-y-2 col-span-3 md:col-span-2">
@@ -184,12 +130,12 @@ export default function CreateEventForm({ onSubmit, onClose }: CreateEventFormPr
           </Label>
           <Input
             id="duration"
-            value={formData.duration}
-            onChange={(e) => handleInputChange("duration", e.target.value)}
+            name="duration"
             placeholder="e.g., 2-3 hours"
-            className={`bg-slate-700 border-slate-600 text-white ${errors.duration ? "border-red-500" : ""}`}
+            className={`bg-slate-700 border-slate-600 text-white`}
+            required
           />
-          {errors.duration && <p className="text-red-400 text-sm">{errors.duration}</p>}
+          {/* {errors.duration && <p className="text-red-400 text-sm">{errors.duration}</p>} */}
         </div>
 
         <div className="space-y-2 col-span-3">
@@ -199,12 +145,12 @@ export default function CreateEventForm({ onSubmit, onClose }: CreateEventFormPr
           </Label>
           <Input
             id="location"
-            value={formData.location}
-            onChange={(e) => handleInputChange("location", e.target.value)}
+            name="location"
             placeholder="e.g., San Francisco, CA"
-            className={`bg-slate-700 border-slate-600 text-white ${errors.location ? "border-red-500" : ""}`}
+            className={`bg-slate-700 border-slate-600 text-white`}
+            required
           />
-          {errors.location && <p className="text-red-400 text-sm">{errors.location}</p>}
+          {/* {errors.location && <p className="text-red-400 text-sm">{errors.location}</p>} */}
         </div>
 
         <div className="space-y-2 col-span-3">
@@ -215,28 +161,28 @@ export default function CreateEventForm({ onSubmit, onClose }: CreateEventFormPr
           <Input
             id="maxAttendees"
             type="number"
+            name="max_attendees"
             min="1"
-            value={formData.maxAttendees}
-            onChange={(e) => handleInputChange("maxAttendees", e.target.value)}
             placeholder="e.g., 50"
-            className={`bg-slate-700 border-slate-600 text-white ${errors.maxAttendees ? "border-red-500" : ""}`}
+            className={`bg-slate-700 border-slate-600 text-white`}
+            required
           />
-          {errors.maxAttendees && <p className="text-red-400 text-sm">{errors.maxAttendees}</p>}
+          {/* {errors.maxAttendees && <p className="text-red-400 text-sm">{errors.maxAttendees}</p>} */}
         </div>
 
         <div className="space-y-2 col-span-3">
           <Label htmlFor="status" className="text-slate-300">
             Status
           </Label>
-          <Select value={formData.status} onValueChange={(value) => handleInputChange("status", value)}>
+          <Select defaultValue="DRAFT" name="status"  >
             <SelectTrigger className="bg-slate-700 border-slate-600 text-white mb-0">
               <SelectValue />
             </SelectTrigger>
             <SelectContent className="bg-slate-700 border-slate-600">
-              <SelectItem value="draft" className="text-white hover:bg-slate-600">
+              <SelectItem value="DRAFT" className="text-white hover:bg-slate-600">
                 Draft
               </SelectItem>
-              <SelectItem value="published" className="text-white hover:bg-slate-600">
+              <SelectItem value="PUBLISHED" className="text-white hover:bg-slate-600">
                 Published
               </SelectItem>
             </SelectContent>

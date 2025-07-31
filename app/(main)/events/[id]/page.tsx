@@ -1,90 +1,19 @@
 "use client"
 
-import { useState, use } from "react";
+import { useState, use, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Separator } from "@/components/ui/separator"
-import { Calendar, MapPin, Users, Clock, ArrowLeft, Mail, Phone } from "lucide-react"
+import { Calendar, MapPin, Users, Clock, ArrowLeft, Mail } from "lucide-react"
 import Link from "next/link"
 import clsx from "clsx";
-
-// Extended events data - in a real app this would come from an API
-const allEvents = [
-  {
-    id: 1,
-    title: "Strategy Workshop",
-    category: "team-building",
-    date: "2024-12-15",
-    time: "2:00 PM",
-    duration: "2-4 hours",
-    location: "San Francisco, CA",
-    venue: "TechHub Conference Center",
-    address: "123 Innovation Drive, San Francisco, CA 94105",
-    price: 0,
-    rating: 4.8,
-    attendees: 24,
-    maxAttendees: 30,
-    image: "https://placehold.co/800x400",
-    featured: true,
-    description:
-      "Join us for an intensive strategy workshop designed to help teams align on goals, identify opportunities, and create actionable plans for success. This interactive session will cover strategic planning methodologies, competitive analysis, and implementation frameworks.",
-    organizer: {
-      name: "TechCorp Events",
-      avatar: "/placeholder.svg?height=100&width=100",
-      bio: "Leading provider of corporate training and team building events in the Bay Area.",
-      email: "events@techcorp.com",
-      phone: "+1 (555) 123-4567",
-      website: "www.techcorp-events.com",
-    },
-    tags: ["Strategy", "Planning", "Leadership", "Team Building"],
-    agenda: [
-      { time: "2:00 PM", activity: "Welcome & Introductions" },
-      { time: "2:15 PM", activity: "Strategic Planning Framework Overview" },
-      { time: "3:00 PM", activity: "Hands-on Workshop: Goal Setting" },
-      { time: "3:45 PM", activity: "Break" },
-      { time: "4:00 PM", activity: "Implementation Planning" },
-      { time: "4:45 PM", activity: "Q&A and Wrap-up" },
-    ],
-  },
-  {
-    id: 2,
-    title: "Synergy Session: Team Building",
-    category: "team-building",
-    date: "2024-12-18",
-    time: "6:00 PM",
-    duration: "3-4 hours",
-    location: "San Francisco, CA",
-    venue: "Synergy Center",
-    address: "456 Collaboration Ave, San Francisco, CA 94107",
-    price: 0,
-    rating: 4.9,
-    attendees: 156,
-    maxAttendees: 200,
-    image: "https://placehold.co/800x400",
-    description: "Build stronger team connections through collaborative activities and trust-building exercises.",
-    fullDescription:
-      "Our Synergy Session is designed to strengthen team bonds and improve collaboration through engaging activities and exercises. This event focuses on communication, trust-building, and creating a positive team dynamic that translates to better workplace performance.\n\nActivities include:\n• Trust-building exercises\n• Communication workshops\n• Problem-solving challenges\n• Team bonding activities\n• Reflection and goal-setting sessions\n\nPerfect for teams looking to improve their working relationships and overall effectiveness.",
-    organizer: {
-      name: "Team Dynamics Inc",
-      avatar: "/placeholder.svg?height=100&width=100",
-      bio: "Specialists in team building and organizational development with over 10 years of experience.",
-      email: "info@teamdynamics.com",
-      phone: "+1 (555) 987-6543",
-      website: "www.teamdynamics.com",
-    },
-    tags: ["Team Building", "Communication", "Trust", "Collaboration"],
-    agenda: [
-      { time: "6:00 PM", activity: "Welcome Reception" },
-      { time: "6:30 PM", activity: "Icebreaker Activities" },
-      { time: "7:15 PM", activity: "Trust Building Exercises" },
-      { time: "8:00 PM", activity: "Dinner Break" },
-      { time: "8:45 PM", activity: "Collaborative Challenges" },
-      { time: "9:30 PM", activity: "Reflection & Closing" },
-    ],
-  },
-]
+import { getEvent } from "@/lib/actions/event";
+import { format } from "date-fns";
+import { EventDetailType } from "@/lib/types";
+import { registerEvent } from "@/lib/actions/participant";
+import { Loading } from "@/components/loading";
 
 interface EventDetailPageProps {
   params: Promise<{
@@ -93,16 +22,29 @@ interface EventDetailPageProps {
 }
 
 export default function EventDetailPage(props: EventDetailPageProps) {
+  const [event, setEvent] = useState<EventDetailType | null>({} as EventDetailType | null);
+  const [isLoading, setIsLoading] = useState(true)
   const params = use(props.params);
-  const [isRegistered, setIsRegistered] = useState(false)
-
-  // Find the event by ID
   const { id } = params
-  const event = allEvents.find((e) => e.id === Number.parseInt(id))
+  let date, time;
+
+  useEffect(() => {
+    fetchEvent();
+  }, [])
+
+  async function fetchEvent() {
+    const response = await getEvent(id);
+    setEvent(response);
+    setIsLoading(false)
+  }
+
+  if (isLoading) {
+    return <Loading />
+  }
 
   if (!event) {
     return (
-      <div className="min-h-screen bg-slate-900">
+      <div className="min-h-[50vh] bg-slate-900">
         <div className="container mx-auto px-4 py-20 text-center">
           <h1 className="text-2xl font-bold text-white mb-4">Event Not Found</h1>
           <p className="text-slate-400 mb-8">The event you're looking for doesn't exist.</p>
@@ -117,54 +59,25 @@ export default function EventDetailPage(props: EventDetailPageProps) {
     )
   }
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString)
-    return date.toLocaleDateString("en-US", {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    })
+  const handleRegister = async () => {
+    await registerEvent(event.id)
+    fetchEvent()
   }
 
-  const getDaysUntilEvent = (dateString: string) => {
-    const eventDate = new Date(dateString)
-    const today = new Date()
-    const diffTime = eventDate.getTime() - today.getTime()
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-
-    if (diffDays === 0) return "Today"
-    if (diffDays === 1) return "Tomorrow"
-    if (diffDays > 0) return `${diffDays} days away`
-    return "Past event"
+  if (event.dateTime) {
+    date = format(event.dateTime, 'MMMM dd, yyyy')
+    time = format(event.dateTime, 'HH:mm')
   }
-
-  const handleRegister = () => {
-    setIsRegistered(!isRegistered)
-  }
-
-  // const handleShare = () => {
-  //   if (navigator.share) {
-  //     navigator.share({
-  //       title: event.title,
-  //       text: event.description,
-  //       url: window.location.href,
-  //     })
-  //   } else {
-  //     // Fallback: copy to clipboard
-  //     navigator.clipboard.writeText(window.location.href)
-  //   }
-  // }
 
   return (
     <div className="min-h-screen bg-slate-900">
 
       {/* Back Navigation */}
       <div className="container mx-auto px-4 py-4">
-        <Link href="/events" className="inline-flex items-center text-slate-300 hover:text-white transition-colors">
+        <span onClick={() => window.history.back()} className="inline-flex items-center text-slate-300 hover:text-white transition-colors cursor-pointer">
           <ArrowLeft className="h-4 w-4 mr-2" />
-          Back to Events
-        </Link>
+          Go back
+        </span>
       </div>
 
       <div className="container mx-auto px-4 py-8">
@@ -175,12 +88,12 @@ export default function EventDetailPage(props: EventDetailPageProps) {
             <Card className="bg-slate-800 border-slate-700 overflow-hidden">
               <div className="relative">
                 <img
-                  src={event.image || "https://placehold.co/800x400"}
+                  src={"https://placehold.co/800x400"}
                   alt={event.title}
                   className="w-full h-64 md:h-80 object-cover"
                 />
                 <div className="absolute top-4 left-4">
-                  <Badge className="bg-orange-500 text-white">{getDaysUntilEvent(event.date)}</Badge>
+                  <Badge className="bg-orange-500 text-white">{date}</Badge>
                 </div>
               </div>
 
@@ -189,8 +102,8 @@ export default function EventDetailPage(props: EventDetailPageProps) {
                   <div className="flex items-start justify-between">
                     <div className="space-y-2">
                       <div className="flex items-center space-x-2">
-                        <Badge variant="secondary" className="bg-slate-700 text-slate-300">
-                          {event.category.replace("-", " ").toUpperCase()}
+                        <Badge variant="secondary" className="bg-slate-700 text-slate-300 capitalize">
+                          {event?.category.replace('_', ' ').toLowerCase()}
                         </Badge>
                         <Badge variant="secondary" className="bg-slate-700 text-slate-300">
                           {event.duration}
@@ -205,8 +118,8 @@ export default function EventDetailPage(props: EventDetailPageProps) {
                     <div className="flex items-center space-x-3">
                       <Calendar className="h-5 w-5 text-orange-500" />
                       <div>
-                        <div className="font-medium">{formatDate(event.date)}</div>
-                        <div className="text-sm text-slate-400">at {event.time}</div>
+                        <div className="font-medium">{date}</div>
+                        <div className="text-sm text-slate-400">at {time}</div>
                       </div>
                     </div>
                     <div className="flex items-center space-x-3">
@@ -220,7 +133,7 @@ export default function EventDetailPage(props: EventDetailPageProps) {
                       <Users className="h-5 w-5 text-orange-500" />
                       <div>
                         <div className="font-medium">{event.attendees} attending</div>
-                        <div className="text-sm text-slate-400">{event.maxAttendees - event.attendees} spots left</div>
+                        <div className="text-sm text-slate-400">{event.max_attendees - event.attendees} spots left</div>
                       </div>
                     </div>
                     <div className="flex items-center space-x-3">
@@ -251,25 +164,19 @@ export default function EventDetailPage(props: EventDetailPageProps) {
                 <h2 className="text-xl font-semibold text-white mb-4">Event Organizer</h2>
                 <div className="flex items-start space-x-4">
                   <Avatar className="h-16 w-16">
-                    <AvatarImage src={event.organizer?.avatar} alt={event.organizer.name} />
-                    <AvatarFallback className="bg-slate-700 text-white">
-                      {event.organizer.name
-                        .split(" ")
+                    <AvatarFallback className="bg-orange-500 text-white">
+                      {event?.organizerName?.split(" ")
                         .map((n) => n[0])
                         .join("")}
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex-1">
-                    <h3 className="text-lg font-medium text-white">{event.organizer.name}</h3>
-                    <p className="text-slate-300 mb-4">{event.organizer.bio}</p>
-                    <div className="space-y-2 text-sm">
-                      <div className="flex items-center space-x-2 text-slate-400">
+                    <h3 className="text-lg font-medium text-white">{event.organizerName}</h3>
+                    <p className="text-slate-300">{event.organizer?.description}</p>
+                    <div className="mt-1 text-sm">
+                      <div className="flex items-center text-sm space-x-2 text-slate-400">
                         <Mail className="h-4 w-4" />
-                        <span>{event.organizer.email}</span>
-                      </div>
-                      <div className="flex items-center space-x-2 text-slate-400">
-                        <Phone className="h-4 w-4" />
-                        <span>{event.organizer.phone}</span>
+                        <span>{event.organizer?.email}</span>
                       </div>
                     </div>
                   </div>
@@ -291,15 +198,16 @@ export default function EventDetailPage(props: EventDetailPageProps) {
 
                   <Button
                     onClick={handleRegister}
-                    className={clsx('w-full cursor-pointer text-white', {
-                      "bg-green-600 hover:bg-green-700": isRegistered,
-                      "bg-orange-500 hover:bg-orange-600": !isRegistered,
-                    })}
+                    disabled={event.hasJoined}
+                    className={clsx('w-full cursor-pointer text-white',
+                      event.hasJoined && 'bg-green-600 hover:bg-green-700',
+                      !event.hasJoined && 'bg-orange-500 hover:bg-orange-600'
+                    )}
                   >
-                    {isRegistered ? "Registered ✓" : "Register Now"}
+                    {event.hasJoined ? 'Already Joined' : 'Join Event'}
                   </Button>
 
-                  <div className="text-xs text-slate-400">{event.maxAttendees - event.attendees} spots remaining</div>
+                  <div className="text-xs text-slate-400">{event.max_attendees - event.attendees} spots remaining</div>
                 </div>
 
                 <Separator className="my-6 bg-slate-700" />
@@ -307,11 +215,11 @@ export default function EventDetailPage(props: EventDetailPageProps) {
                 <div className="space-y-3 text-sm">
                   <div className="flex justify-between">
                     <span className="text-slate-400">Date</span>
-                    <span className="text-white">{formatDate(event.date)}</span>
+                    <span className="text-white">{date}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-400">Time</span>
-                    <span className="text-white">{event.time}</span>
+                    <span className="text-white">{time}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-400">Duration</span>

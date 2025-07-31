@@ -1,14 +1,8 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
+import { completeRegistrationSchema } from "@/lib/validations/zodSchema";
 import { NextResponse } from "next/server";
-import z from "zod";
-
-// Zod Schema
-const completeRegistrationSchema = z.object({
-  email: z.email(),
-  role: z.enum(["PARTICIPANT", "ORGANIZER"]),
-});
 
 export async function POST(req: Request) {
   try {

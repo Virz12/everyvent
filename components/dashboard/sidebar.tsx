@@ -1,4 +1,4 @@
-import { Calendar, LayoutDashboard, LogOut, User2, Users, X } from "lucide-react"
+import { Calendar, LayoutDashboard, LogOut, User2, X } from "lucide-react"
 import { Button } from "../ui/button"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -15,7 +15,7 @@ interface sidebarProps {
 const navigationOrganizer = [
   { name: "Overview", href: "/dashboard/organizer", icon: LayoutDashboard },
   { name: "My Events", href: "/dashboard/organizer/events", icon: Calendar },
-  { name: "Attendees", href: "/dashboard/organizer/attendees", icon: Users },
+  // { name: "Attendees", href: "/dashboard/organizer/attendees", icon: Users },
   { name: "My Account", href: "/dashboard/organizer/account", icon: User2 }
 ]
 

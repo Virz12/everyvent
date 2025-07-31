@@ -1,18 +1,10 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
+import { registerSchema } from "@/lib/validations/zodSchema";
 import { Role } from "@prisma/client";
 import { hash } from "bcryptjs";
 import { NextResponse } from "next/server";
-import * as z from "zod";
-
-// Zod Schema
-const registerSchema = z.object({
-  name: z.string(),
-  email: z.email(),
-  password: z.string().min(8),
-  role: z.enum(["PARTICIPANT", "ORGANIZER"]),
-});
 
 export async function POST(req: Request) {
   try {

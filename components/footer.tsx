@@ -8,7 +8,7 @@ export function Footer() {
       <div className="container mx-auto">
         <div className="grid lg:grid-cols-4 gap-8 mb-12">
           {/* Company Info */}
-          <div className="space-y-6">
+          <div className="max-w-1/2 xl:max-w-1/3 space-y-6 col-span-2">
             <div className="flex items-center space-x-2">
               <div className="rounded-lg flex items-center justify-center">
                 <Image src={"/logo.avif"} width={128} height={64} alt="Everyvent Icon" />
@@ -31,28 +31,6 @@ export function Footer() {
               </Link>
               <Link href="/about" className="text-slate-300 hover:text-white transition-colors">
                 About Us
-              </Link>
-            </nav>
-          </div>
-
-          {/* Categories */}
-          <div className="space-y-6">
-            <h3 className="text-white font-semibold text-lg">Categories</h3>
-            <nav className="flex flex-col space-y-3">
-              <Link href="/workshops" className="text-slate-300 hover:text-white transition-colors">
-                Workshops
-              </Link>
-              <Link href="/meetups" className="text-slate-300 hover:text-white transition-colors">
-                Meetups
-              </Link>
-              <Link href="/conferences" className="text-slate-300 hover:text-white transition-colors">
-                Conferences
-              </Link>
-              <Link href="/networking" className="text-slate-300 hover:text-white transition-colors">
-                Networking
-              </Link>
-              <Link href="/webinars" className="text-slate-300 hover:text-white transition-colors">
-                Webinars
               </Link>
             </nav>
           </div>
