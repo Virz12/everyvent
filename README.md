@@ -23,7 +23,7 @@
 
 | Frontend                | Backend        | Others                            |
 | ----------------------- | -------------- | --------------------------------- |
-| Next.js 14 (App Router) | Prisma ORM     | Tailwind CSS                      |
+| Next.js 15 (App Router) | Prisma ORM     | Tailwind CSS                      |
 | React                   | PostgreSQL     | NextAuth v5 (OAuth + Credentials) |
 | TypeScript              | Server Actions | Vercel Hosting                    |
 
@@ -34,7 +34,7 @@
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/username/everyvent.git
+git clone https://github.com/virz12/everyvent.git
 cd everyvent
 ```
 
@@ -50,11 +50,10 @@ Create a `.env` file and add the following:
 
 ```
 DATABASE_URL=postgresql://USER:PASSWORD@HOST:PORT/DATABASE
-NEXTAUTH_SECRET=your-secret-key
-NEXTAUTH_URL=http://localhost:3000
+AUTH_SECRET=your-secret-key
 
-GOOGLE_CLIENT_ID=your-google-client-id
-GOOGLE_CLIENT_SECRET=your-google-client-secret
+AUTH_GOOGLE_ID=your-google-client-id
+AUTH_GOOGLE_SECRET=your-google-client-secret
 ```
 
 4. **Generate Prisma Client & Migrate DB**
@@ -80,7 +79,7 @@ app/
 ├─ (main)/              # Public pages: home, about, events
 ├─ api/                 # API routes & server actions
 ├─ dashboard/           # User dashboard
-├─ ui/                  # Global UI components
+├─ ui/                  # Fonst & Global style
 public/                 # Static assets & images
 ```
 
