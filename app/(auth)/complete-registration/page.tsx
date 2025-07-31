@@ -19,8 +19,6 @@ export default function RoleSelectionForm() {
   const handleRoleSelection = async () => {
     if (!selectedRole) return
 
-    console.log(email);
-
     setIsLoading(true)
 
     const res = await fetch("/api/complete-registration", {

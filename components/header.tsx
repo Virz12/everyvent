@@ -6,8 +6,11 @@ import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import Image from "next/image"
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden"
+import { useSession } from "next-auth/react"
 
 export function Header() {
+  const { data: session } = useSession()
+
   return (
     <header className="bg-slate-900 fixed w-full z-50 border-b border-slate-800 px-4 lg:px-6">
       <div className="container mx-auto flex h-16 items-center justify-between">
@@ -33,9 +36,11 @@ export function Header() {
               <User className="h-5 w-5" />
             </Button>
           </Link>
-          <Link href="/signin">
-            <Button className="bg-orange-500 hover:bg-orange-600 text-white cursor-pointer">Sign In</Button>
-          </Link>
+          {!session && (
+            <Link href="/signin">
+              <Button className="bg-orange-500 hover:bg-orange-600 text-white cursor-pointer">Sign In</Button>
+            </Link>
+          )}
 
           {/* Mobile Menu */}
           <Sheet>

@@ -29,7 +29,6 @@ export default function ChangePasswordForm() {
     const res = await changePassword(formData)
 
     if (!res?.success) {
-      console.log(res.errors)
       setIsLoading(false)
       return
     }

@@ -5,8 +5,6 @@ export default auth(async function middleware(req) {
   const { nextUrl } = req;
   const token = req.auth;
 
-  console.log(token);
-
   const pathname = nextUrl.pathname;
 
   // Redirect unauthenticated users

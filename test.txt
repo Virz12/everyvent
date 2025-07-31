@@ -61,7 +61,6 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
             email: true,
           },
         });
-        console.log("AWDJKL");
       }
 
       if (session.user) {

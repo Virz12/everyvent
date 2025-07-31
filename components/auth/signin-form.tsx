@@ -43,7 +43,6 @@ export default function SignInForm({
     })
 
     if (res?.error) {
-      console.log(res)
       setErrors(res.code as unknown as string)
       setIsLoading(false)
       return
