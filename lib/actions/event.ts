@@ -1,9 +1,9 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { revalidatePath } from "next/cache";
 import { auth } from "@/auth";
 import { GetEventsParams } from "@/lib/types";
+import { Prisma } from "@prisma/client";
 
 // Read preview events
 export async function getPreviewEvents() {
@@ -30,12 +30,12 @@ export async function getEvents({
   page = 1,
 }: GetEventsParams) {
   const pageSize = 9;
-  const where: any = {
+  const where: Prisma.EventWhereInput = {
     AND: [
       { status: "PUBLISHED" },
       query && { title: { contains: query, mode: "insensitive" } },
       category && { category },
-    ].filter(Boolean),
+    ].filter(Boolean) as Prisma.EventWhereInput[],
   };
 
   const [events, total] = await Promise.all([

@@ -1,4 +1,4 @@
-import { Calendar, LayoutDashboard, LogOut, User2, Users, X } from "lucide-react"
+import { Calendar, LayoutDashboard, LogOut, User2, X } from "lucide-react"
 import { Button } from "../ui/button"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
