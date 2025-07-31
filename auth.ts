@@ -6,6 +6,7 @@ import authConfig from "./auth.config";
 const db = PrismaAdapter(prisma);
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
+  secret: process.env.AUTH_SECRET,
   adapter: db,
   pages: {
     signIn: "/signin",
