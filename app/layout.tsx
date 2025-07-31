@@ -6,7 +6,7 @@ import { Analytics } from "@vercel/analytics/next"
 import Head from "next/head";
 
 export const metadata: Metadata = {
-  title: "Everyvent - Plant Your Events",
+  title: "Everyvent - Plan Your Events",
   description: "Everyvent is a platform that allows you to create, manage, and share events effortlessly. Whether it's a small gathering or a large conference, Everyvent has got you covered.",
 };
 
