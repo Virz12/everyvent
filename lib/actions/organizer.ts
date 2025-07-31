@@ -23,6 +23,7 @@ export async function getDashboardData() {
       prisma.event.count({ where: { status: "PUBLISHED", organizerId } }),
       prisma.event.count({ where: { status: "DRAFT", organizerId } }),
       prisma.event.findMany({
+        where: { organizerId },
         orderBy: { dateTime: "desc" },
         take: 5,
         include: {
