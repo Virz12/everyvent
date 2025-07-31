@@ -1,36 +1,110 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎉 Everyvent — Modern Event Management & Registration Platform
 
-## Getting Started
+![Everyvent Banner](https://everyvent.vercel.app/og-image.png)
 
-First, run the development server:
+**Everyvent** is a modern platform designed to help you discover, manage, and register for events with ease. Whether you're an organizer or attendee, Everyvent provides the tools to streamline your event experience.
+
+🔗 **Live Preview:** [https://everyvent.vercel.app](https://everyvent.vercel.app)
+
+---
+
+## 🚀 Features
+
+- 🔍 Fast & responsive **event search**
+- 📅 Easy-to-use **event management dashboard**
+- ✅ **Google & Manual Authentication** (NextAuth v5)
+- 📝 Real-time **registration & attendance**
+- 📊 Insightful **event analytics dashboard**
+- 📱 Fully **responsive UI** built with Tailwind CSS
+
+---
+
+## 🛠️ Tech Stack
+
+| Frontend                | Backend        | Others                            |
+| ----------------------- | -------------- | --------------------------------- |
+| Next.js 14 (App Router) | Prisma ORM     | Tailwind CSS                      |
+| React                   | PostgreSQL     | NextAuth v5 (OAuth + Credentials) |
+| TypeScript              | Server Actions | Vercel Hosting                    |
+
+---
+
+## 📦 Local Setup
+
+1. **Clone the repository**
+
+```bash
+git clone https://github.com/username/everyvent.git
+cd everyvent
+```
+
+2. **Install dependencies**
+
+```bash
+npm install
+```
+
+3. **Setup Environment Variables**
+
+Create a `.env` file and add the following:
+
+```
+DATABASE_URL=postgresql://USER:PASSWORD@HOST:PORT/DATABASE
+NEXTAUTH_SECRET=your-secret-key
+NEXTAUTH_URL=http://localhost:3000
+
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+```
+
+4. **Generate Prisma Client & Migrate DB**
+
+```bash
+npx prisma generate
+npx prisma migrate dev
+```
+
+5. **Run the development server**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🧠 Folder Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+app/
+├─ (auth)/              # Auth pages: login, register
+├─ (main)/              # Public pages: home, about, events
+├─ api/                 # API routes & server actions
+├─ dashboard/           # User dashboard
+├─ ui/                  # Global UI components
+public/                 # Static assets & images
+```
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🛡️ Authentication
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Using **NextAuth v5** with two strategies:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- 🔐 Google OAuth2
+- 🔑 Credentials (email & password)
 
-## Deploy on Vercel
+Authentication is session-based using `auth()` server actions.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 👨‍💻 Developer
+
+Made with ❤️ by [Virz](https://github.com/virz12)
+
+---
+
+## 📄 License
+
+MIT License — Free to use, modify, and distribute.
+
+---
