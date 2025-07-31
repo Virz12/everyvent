@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { CreateEventType } from "@/lib/types";
 import { format, parse } from "date-fns";
 import { Calendar, Clock, MapPin, Users } from "lucide-react";
-import { useEffect, useState } from "react";
+
 
 interface EditEventFormProps {
   onClose: () => void
@@ -125,7 +125,7 @@ export default function EditEventForm({ onSubmit, onClose, event }: EditEventFor
             id="time"
             type="time"
             name="time"
-            defaultValue={event.dateTime.toISOString().split("T")[1]}
+            defaultValue={event.dateTime.toTimeString().split(" ")[0].substring(0, 5)}
             className={`bg-slate-700 border-slate-600 text-white block`}
             required
           />

@@ -6,53 +6,30 @@ import { Calendar, Search, Clock, Star } from "lucide-react"
 import Link from "next/link"
 import EventCard from "@/components/dashboard/participant/event-card"
 import { useSession } from "next-auth/react"
-
-// Mock registered events
-const registeredEvents = [
-  {
-    id: 1,
-    title: "Strategy Workshop",
-    category: "team-building",
-    date: "2024-12-15",
-    time: "2:00 PM",
-    duration: "2-4 hours",
-    location: "San Francisco, CA",
-    organizer: "TechCorp Events",
-    status: "confirmed",
-    image: "https://placehold.co/300x200",
-    description: "Interactive strategy planning session for teams",
-  },
-  {
-    id: 2,
-    title: "Professional Networking Mixer",
-    category: "networking",
-    date: "2024-12-22",
-    time: "7:00 PM",
-    duration: "2-3 hours",
-    location: "Seattle, WA",
-    organizer: "Seattle Business Network",
-    status: "confirmed",
-    image: "https://placehold.co/300x200",
-    description: "Connect with industry professionals in a relaxed setting",
-  },
-  {
-    id: 3,
-    title: "Innovation Workshop Series",
-    category: "team-building",
-    date: "2025-01-10",
-    time: "1:00 PM",
-    duration: "3-4 hours",
-    location: "Boston, MA",
-    organizer: "Innovation Labs",
-    status: "pending",
-    image: "https://placehold.co/300x200",
-    description: "Foster innovation and creativity in your team",
-  },
-]
+import { useEffect, useState } from "react"
+import { EventType } from "@/lib/types"
+import { getRegisteredEvents } from "@/lib/actions/participant"
+import { Loading } from "@/components/loading"
 
 export default function ParticipantDashboard() {
+  const [isLoading, setIsLoading] = useState(true)
+  const [events, setEvents] = useState<EventType[]>([])
   const { data: session } = useSession()
   const currentUser = session?.user
+
+  useEffect(() => {
+    loadEvents();
+  }, []);
+
+  async function loadEvents() {
+    const data = await getRegisteredEvents();
+    setEvents(data);
+    setIsLoading(false);
+  }
+
+  if (isLoading) {
+    return <Loading />
+  }
 
   return (
     <div className="min-h-screen bg-slate-900">
@@ -83,7 +60,7 @@ export default function ParticipantDashboard() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-slate-400 text-sm">Registered Events</p>
-                    <p className="text-2xl font-bold text-white">{registeredEvents.length}</p>
+                    <p className="text-2xl font-bold text-white">{events.length}</p>
                   </div>
                   <Calendar className="h-8 w-8 text-orange-500" />
                 </div>
@@ -96,7 +73,7 @@ export default function ParticipantDashboard() {
                   <div>
                     <p className="text-slate-400 text-sm">Upcoming Events</p>
                     <p className="text-2xl font-bold text-white">
-                      {registeredEvents.filter((e) => new Date(e.date) > new Date()).length}
+                      {events.filter((e) => new Date(e.dateTime) > new Date()).length}
                     </p>
                   </div>
                   <Clock className="h-8 w-8 text-blue-500" />
@@ -109,7 +86,9 @@ export default function ParticipantDashboard() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-slate-400 text-sm">Events Attended</p>
-                    <p className="text-2xl font-bold text-white">12</p>
+                    <p className="text-2xl font-bold text-white">
+                      {events.filter((e) => new Date(e.dateTime) < new Date()).length}
+                    </p>
                   </div>
                   <Star className="h-8 w-8 text-yellow-500" />
                 </div>
@@ -118,22 +97,17 @@ export default function ParticipantDashboard() {
           </div>
 
           {/* My Registered Events */}
-          <Card className="bg-slate-800 border-slate-700 pb-6">
-            <CardHeader>
+          <Card className="border-none pb-6">
+            <CardHeader className="px-0">
               <div className="flex justify-between items-center pt-6">
                 <CardTitle className="space-y-1.5">
                   <h3 className="text-2xl tracking-tight text-white">My Registered Events</h3>
                 </CardTitle>
-                <Link href='/events'>
-                  <Button variant="outline" className="border-slate-600 text-slate-300 hover:bg-slate-700 bg-transparent cursor-pointer">
-                    View All
-                  </Button>
-                </Link>
               </div>
             </CardHeader>
-            <CardContent>
+            <CardContent className="px-0">
               <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-                {registeredEvents.map((event) => (
+                {events.map((event) => (
                   <EventCard key={event.id} event={event} />
                 ))}
               </div>

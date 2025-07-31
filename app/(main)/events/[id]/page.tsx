@@ -74,10 +74,10 @@ export default function EventDetailPage(props: EventDetailPageProps) {
 
       {/* Back Navigation */}
       <div className="container mx-auto px-4 py-4">
-        <Link href="/events" className="inline-flex items-center text-slate-300 hover:text-white transition-colors">
+        <span onClick={() => window.history.back()} className="inline-flex items-center text-slate-300 hover:text-white transition-colors cursor-pointer">
           <ArrowLeft className="h-4 w-4 mr-2" />
-          Back to Events
-        </Link>
+          Go back
+        </span>
       </div>
 
       <div className="container mx-auto px-4 py-8">

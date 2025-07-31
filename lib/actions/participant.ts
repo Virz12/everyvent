@@ -3,11 +3,16 @@
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
 export async function registerEvent(eventId: string) {
   const session = await auth();
 
-  if (!session?.user?.id || session.user.role !== "PARTICIPANT") {
+  if (!session?.user?.id) {
+    redirect("/signin");
+  }
+
+  if (session?.user.role !== "PARTICIPANT") {
     throw new Error("Unauthorized");
   }
 
@@ -56,4 +61,41 @@ export async function registerEvent(eventId: string) {
   });
 
   revalidatePath(`/events/${eventId}`);
+}
+
+export async function getRegisteredEvents() {
+  const session = await auth();
+
+  if (!session?.user?.id || session.user.role !== "PARTICIPANT") {
+    throw new Error("Unauthorized");
+  }
+
+  const userId = session.user.id;
+
+  const registeredEvents = await prisma.joinedEvent.findMany({
+    where: { userId },
+    include: {
+      event: {
+        select: {
+          category: true,
+          description: true,
+          dateTime: true,
+          id: true,
+          duration: true,
+          location: true,
+          organizerName: true,
+          title: true,
+          max_attendees: true,
+          status: true,
+          _count: {
+            select: {
+              attendeesList: true,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  return registeredEvents.map((je) => je.event);
 }
